@@ -1,26 +1,31 @@
+import '@babel/polyfill';
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Provider} from "react-redux";
+import { ConnectedRouter } from 'connected-react-router/immutable';
+import history from './config/History/history';
+import {LanguageProvider} from "./config/LanguageProvider";
+import { translationMessages } from './translations/i18n';
+import configureStore from "./config/Redux/configureStore";
+import {BrowserRouter as Router} from "react-router-dom";
+import {Routes} from "./scenes/Routes";
+const initialState = {};
+const store = configureStore(initialState, history);
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+        <Provider store={store}>
+          <LanguageProvider messages={translationMessages}>
+            <ConnectedRouter history={history}>
+                <div>df</div>
+               {/* <Router>
+                    <Routes/>
+                </Router>*/}
+            </ConnectedRouter>
+          </LanguageProvider>
+        </Provider>
+
     );
   }
 }
