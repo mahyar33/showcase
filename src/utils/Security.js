@@ -14,7 +14,9 @@ class Security extends Component {
         if (!roles) return true
         return roles.indexOf(localStorage.getItem("role")) > -1
     }
+    static signout(cb) {
 
+    }
 }
 
 export default Security

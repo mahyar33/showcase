@@ -4,8 +4,11 @@
   "private": true,
   "dependencies": {
     "@babel/polyfill": "^7.4.3",
+    "axios": "^0.18.0",
     "connected-react-router": "^6.3.2",
     "cross-env": "^5.2.0",
+    "flow-bin": "^0.97.0",
+    "fontfaceobserver": "^2.1.0",
     "history": "^4.9.0",
     "hoist-non-react-statics": "^3.3.0",
     "immutable": "^4.0.0-rc.12",
@@ -19,6 +22,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-helmet": "^5.2.0",
     "react-intl": "^2.8.0",
     "react-redux": "^7.0.1",
     "react-router-dom": "^5.0.0",
@@ -38,7 +42,8 @@
     "eject": "react-scripts eject",
     "watch-langs": "cross-env NODE_ENV=development nodemon --watch src/**/en.json --watch src/**/fa.json  --exec npm run build-langs",
     "build-langs": "node_modules/.bin/babel-node src/utils/CompoundIntl.js",
-    "start-js": "react-scripts start"
+    "start-js": "react-scripts start",
+    "flow": "flow"
   },
   "eslintConfig": {
     "extends": "react-app"
