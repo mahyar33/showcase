@@ -11,19 +11,19 @@ import {tempAction} from "./actions";
 import {injectIntl} from "react-intl";
 
 
-class Temp extends Component {
+class Test extends Component {
     componentDidMount() {
         console.log('store', this.context.store)
     }
 
     render() {
 
-        return <div>hi</div>
+        return <div>ok</div>
 
     }
 }
 
-Temp.propTypes = {};
+Test.propTypes = {};
 
 export function mapDispatchToProps(dispatch) {
     return {
@@ -40,14 +40,14 @@ const withConnect = connect(
     mapDispatchToProps,
 );
 
-const withReducer = injectReducer({key: 'temp', reducer: tempReducer});
-const withSaga = injectSaga({key: 'temp', saga: tempSaga});
+const withReducer = injectReducer({key: 'test', reducer: tempReducer});
+const withSaga = injectSaga({key: 'test', saga: tempSaga});
 
 export default compose(
     withSaga,
     withConnect,
     injectIntl,
-)(Temp);
+)(Test);
 
 
 

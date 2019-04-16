@@ -7,6 +7,7 @@ import { fromJS } from 'immutable';
 import { routerMiddleware } from 'connected-react-router/immutable';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
+import { persistStore } from 'redux-persist'
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -46,6 +47,8 @@ export default function configureStore(initialState = {}, history) {
       store.replaceReducer(createReducer(store.injectedReducers));
     });
   }
+  const persistor =persistStore(store);
 
-  return store;
+  return {store,persistor};
+
 }

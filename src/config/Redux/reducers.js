@@ -2,13 +2,14 @@
  * Combine all reducers in this file and export the combined reducers.
  */
 
-import { combineReducers } from 'redux-immutable';
+import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router/immutable';
 
 import history from '../History/history';
 import languageProviderReducer from "../LanguageProvider/reducer";
-
-
+import {persistReducer} from "redux-persist";
+import immutableTransform from "redux-persist-transform-immutable";
+import storage from 'redux-persist/lib/storage'
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
  */
@@ -18,6 +19,11 @@ export default function createReducer(injectedReducers = {}) {
     router: connectRouter(history),
     ...injectedReducers,
   });
-
-  return rootReducer;
+  const persistConfig = {
+    transforms: [immutableTransform()],
+    key: 'root',
+    storage,
+    whitelist: ['global','language']
+  };
+  return persistReducer(persistConfig, rootReducer);
 }
