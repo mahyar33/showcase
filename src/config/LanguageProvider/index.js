@@ -14,7 +14,7 @@ import { IntlProvider } from 'react-intl';
 
 import { makeSelectLocale } from './selectors';
 
-export class LanguageProvider extends React.PureComponent {
+class LanguageProvider extends React.PureComponent {
   render() {
     return (
       <IntlProvider

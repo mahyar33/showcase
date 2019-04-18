@@ -60,6 +60,9 @@
     "babel-cli": "^6.26.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
+    "reactotron-react-js": "^3.0.2",
+    "reactotron-redux": "^3.1.0",
+    "reactotron-redux-saga": "^4.2.1",
     "sinon": "^7.3.1"
   }
 }

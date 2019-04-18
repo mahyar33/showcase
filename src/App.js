@@ -4,7 +4,7 @@ import './App.css';
 import {Provider} from "react-redux";
 import { ConnectedRouter } from 'connected-react-router/immutable';
 import history from './config/History/history';
-import {LanguageProvider} from "./config/LanguageProvider";
+import LanguageProvider from "./config/LanguageProvider";
 import { translationMessages } from './translations/i18n';
 import configureStore from "./config/Redux/configureStore";
 import {BrowserRouter as Router} from "react-router-dom";

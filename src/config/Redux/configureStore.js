@@ -8,8 +8,10 @@ import { routerMiddleware } from 'connected-react-router/immutable';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
 import { persistStore } from 'redux-persist'
+import Reactotron from '../DevTools/ReactotronConfig'
 
-const sagaMiddleware = createSagaMiddleware();
+const sagaMonitor = Reactotron.createSagaMonitor();
+const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
 
 export default function configureStore(initialState = {}, history) {
   // Create the store with two middlewares
@@ -17,7 +19,7 @@ export default function configureStore(initialState = {}, history) {
   // 2. routerMiddleware: Syncs the location/URL path to the state
   const middlewares = [sagaMiddleware, routerMiddleware(history)];
 
-  const enhancers = [applyMiddleware(...middlewares)];
+  const enhancers = [applyMiddleware(...middlewares),Reactotron.createEnhancer()];
 
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose
   /* eslint-disable no-underscore-dangle, indent */
@@ -31,7 +33,7 @@ export default function configureStore(initialState = {}, history) {
 
   const store = createStore(
     createReducer(),
-    fromJS(initialState),
+    initialState,
     composeEnhancers(...enhancers),
   );
 
