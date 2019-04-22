@@ -1,6 +1,6 @@
 import {Component} from 'react'
 import axios from 'axios'
-import Security from './Security'
+import Security from '../utils/Security'
 
 
 let instance = axios.create()

@@ -1,10 +1,10 @@
 import React from "react";
 import {Switch,Route} from "react-router-dom";
-import PublicRoute from "../config/Routing/PublicRoute";
-import PrivateRoute from "../config/Routing/PrivateRoute";
-import RedirectIndex from "../config/Routing/RedirectIndex";
-import Template from "./Template/Template";
-import Test from "./Test/Test";
+import PublicRoute from "./PublicRoute";
+import PrivateRoute from "./PrivateRoute";
+import RedirectIndex from "./RedirectIndex";
+import Template from "../scenes/Template/Template";
+import Test from "../scenes/Test/Test";
 
 
 export const Routes = () => (

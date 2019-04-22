@@ -4,7 +4,7 @@
 
 import {call, put, select, takeLatest} from 'redux-saga/effects';
 import {makeTemp} from './selectors';
-import HttpRequest from "../../utils/HttpRequest";
+import HttpRequest from "../../network/HttpRequest";
 import {tempAction} from "./actions";
 import {temp} from "./constants";
 

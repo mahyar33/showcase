@@ -5,8 +5,8 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router/immutable';
 
-import history from '../History/history';
-import languageProviderReducer from "../LanguageProvider/reducer";
+import history from '../history/history';
+import languageProviderReducer from "../languageProvider/reducer";
 import {persistReducer} from "redux-persist";
 import immutableTransform from "redux-persist-transform-immutable";
 import storage from 'redux-persist/lib/storage'

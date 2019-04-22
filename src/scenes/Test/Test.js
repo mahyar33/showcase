@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types';
-import injectSaga from "../../config/Redux/injectSaga";
-import injectReducer from "../../config/Redux/injectReducer";
+import injectSaga from "../../configs/redux/injectSaga";
+import injectReducer from "../../configs/redux/injectReducer";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {createStructuredSelector} from "reselect";

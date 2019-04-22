@@ -8,7 +8,7 @@ import { routerMiddleware } from 'connected-react-router/immutable';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
 import { persistStore } from 'redux-persist'
-import Reactotron from '../DevTools/ReactotronConfig'
+import Reactotron from '../devTools/ReactotronConfig'
 
 const sagaMonitor = Reactotron.createSagaMonitor();
 const sagaMiddleware = createSagaMiddleware({ sagaMonitor });

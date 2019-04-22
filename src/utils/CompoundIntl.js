@@ -5,7 +5,7 @@ const mkdirpSync = require('mkdirp');
 
 
 const MESSAGES_PATTERN = {  en:'./src/**/en.json',fa:'./src/**/fa.json'};
-const LANG_DIR         = './src/translations/';
+const LANG_DIR         = './src/assets/translations/';
 
 // Aggregates the default messages that were extracted from the example app's
 // React components via the React Intl Babel plugin. An error will be thrown if
