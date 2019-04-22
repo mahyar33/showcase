@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 import './App.css';
 import {Provider} from "react-redux";
 import { ConnectedRouter } from 'connected-react-router/immutable';
-import history from './config/History/history';
-import LanguageProvider from "./config/LanguageProvider";
-import { translationMessages } from './translations/i18n';
-import configureStore from "./config/Redux/configureStore";
+import history from './configs/history/history';
+import LanguageProvider from "./configs/languageProvider";
+import { translationMessages } from './assets/translations/i18n';
+import configureStore from "./configs/redux/configureStore";
 import {BrowserRouter as Router} from "react-router-dom";
-import {Routes} from "./scenes/Routes";
+import {Routes} from "./routes/Routes";
 import Temp from './scenes/Template/Template'
 import FontFaceObserver from 'fontfaceobserver';
 import { PersistGate } from 'redux-persist/integration/react'
