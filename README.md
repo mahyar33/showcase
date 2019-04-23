@@ -38,6 +38,7 @@ It's a React boilerplate with these technologies:
     - routes (routes address,handling private route,handling public route)
     - utils (Logger.js, Converter.js, FileUtils.js, ...)
     - network (http request,socket connection,..)
+    - api (api call)
 
 # Commands
 - **npm run doc** generate docs locally
