@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Routes.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="..\..\docco.css" />
+</head>
+<body>
+  <div class="container">
+    
+      <div class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+          
+          
+          
+            
+            
+            
+            
+            <li class="indent0">
+              <a class="source" href="..\..\README.html">
+                README.md
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+                  <h4 class="indent0">misc/</h4>
+                
+              
+                
+                  <h4 class="indent1">tutorials/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\..\misc\tutorials\networkInstallation.html">
+                networkInstallation.md
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+                  <h4 class="indent0">src/</h4>
+                
+              
+              
+            
+            
+            <li class="indent1">
+              <a class="source" href="..\App.html">
+                App.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent1">
+              <a class="source" href="..\App.test.html">
+                App.test.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent1">
+              <a class="source" href="..\index.html">
+                index.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+                
+                  <h4 class="indent1">network/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\network\HttpRequest.html">
+                HttpRequest.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\network\SocketConnection.html">
+                SocketConnection.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+                
+                  <h4 class="indent1">routes/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="PrivateRoute.html">
+                PrivateRoute.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="PublicRoute.html">
+                PublicRoute.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="RedirectIndex.html">
+                RedirectIndex.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="Routes.html">
+                Routes.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="authorizedRoutes.html">
+                authorizedRoutes.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+              
+            
+            
+            <li class="indent1">
+              <a class="source" href="..\serviceWorker.html">
+                serviceWorker.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+                
+                  <h4 class="indent1">utils/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\utils\CompoundIntl.html">
+                CompoundIntl.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\utils\Security.html">
+                Security.js
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+    
+    <div class="page">
+      <div class="header">
+        
+          <h1>Routes.js</h1>
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+<span class="hljs-keyword">import</span> {Switch,Route} <span class="hljs-keyword">from</span> <span class="hljs-string">"react-router-dom"</span>;
+<span class="hljs-keyword">import</span> PublicRoute <span class="hljs-keyword">from</span> <span class="hljs-string">"./PublicRoute"</span>;
+<span class="hljs-keyword">import</span> PrivateRoute <span class="hljs-keyword">from</span> <span class="hljs-string">"./PrivateRoute"</span>;
+<span class="hljs-keyword">import</span> RedirectIndex <span class="hljs-keyword">from</span> <span class="hljs-string">"./RedirectIndex"</span>;
+<span class="hljs-keyword">import</span> Template <span class="hljs-keyword">from</span> <span class="hljs-string">"../scenes/Template/Template"</span>;
+<span class="hljs-keyword">import</span> Test <span class="hljs-keyword">from</span> <span class="hljs-string">"../scenes/Test/Test"</span>;
+
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Routes = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;Switch&gt;
+{/*        &lt;Route key={0} exact path="/" component={RedirectIndex}/&gt;,*/}
+        &lt;Route key={1} exact path="/temp" component={Template}/&gt;,
+        &lt;Route key={2} exact path="/test" component={Test}/&gt;,
+   {/*     &lt;Route component={RedirectIndex}/&gt;*/}
+    &lt;/Switch&gt;
+)</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

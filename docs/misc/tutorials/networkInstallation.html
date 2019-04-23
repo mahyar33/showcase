@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Network Installation</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="..\..\docco.css" />
+</head>
+<body>
+  <div class="container">
+    
+      <div class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+          
+          
+          
+            
+            
+            
+            
+            <li class="indent0">
+              <a class="source" href="..\..\README.html">
+                README.md
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+                  <h4 class="indent0">misc/</h4>
+                
+              
+                
+                  <h4 class="indent1">tutorials/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="networkInstallation.html">
+                networkInstallation.md
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+                  <h4 class="indent0">src/</h4>
+                
+              
+              
+            
+            
+            <li class="indent1">
+              <a class="source" href="..\..\src\App.html">
+                App.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent1">
+              <a class="source" href="..\..\src\App.test.html">
+                App.test.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent1">
+              <a class="source" href="..\..\src\index.html">
+                index.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+                
+                  <h4 class="indent1">network/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\..\src\network\HttpRequest.html">
+                HttpRequest.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\..\src\network\SocketConnection.html">
+                SocketConnection.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+                
+                  <h4 class="indent1">routes/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\..\src\routes\PrivateRoute.html">
+                PrivateRoute.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\..\src\routes\PublicRoute.html">
+                PublicRoute.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\..\src\routes\RedirectIndex.html">
+                RedirectIndex.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\..\src\routes\Routes.html">
+                Routes.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\..\src\routes\authorizedRoutes.html">
+                authorizedRoutes.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+              
+            
+            
+            <li class="indent1">
+              <a class="source" href="..\..\src\serviceWorker.html">
+                serviceWorker.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+                
+                  <h4 class="indent1">utils/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\..\src\utils\CompoundIntl.html">
+                CompoundIntl.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\..\src\utils\Security.html">
+                Security.js
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+    
+    <div class="page">
+      <div class="header">
+        
+          
+          <h1 id="network-installation">Network Installation</h1>
+<ul>
+<li><strong>import httprequest</strong> </li>
+<li><strong>use static promise functions for rest api(post,get,put,..)</strong> 
+successful</li>
+<li><em>notice:it’s like ordinary promise if it’s successful you get answers in ‘then’ if not you handle it in catch*</em> </li>
+</ul>
+<h2 id="sample-code">sample code</h2>
+<pre><code>axios.post('/create', {a:'car'})
+.then((response) =&gt; 
+{
+//if successful
+}
+)
+.catch((error) =&gt; {
+//if not
+});</code></pre>
+          
+        
+      </div>
+
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

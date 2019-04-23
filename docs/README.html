@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Intro</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    
+      <div class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+          
+          
+          
+            
+            
+            
+            
+            <li class="indent0">
+              <a class="source" href="README.html">
+                README.md
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+                  <h4 class="indent0">misc/</h4>
+                
+              
+                
+                  <h4 class="indent1">tutorials/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="misc\tutorials\networkInstallation.html">
+                networkInstallation.md
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+                  <h4 class="indent0">src/</h4>
+                
+              
+              
+            
+            
+            <li class="indent1">
+              <a class="source" href="src\App.html">
+                App.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent1">
+              <a class="source" href="src\App.test.html">
+                App.test.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent1">
+              <a class="source" href="src\index.html">
+                index.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+                
+                  <h4 class="indent1">network/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="src\network\HttpRequest.html">
+                HttpRequest.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="src\network\SocketConnection.html">
+                SocketConnection.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+                
+                  <h4 class="indent1">routes/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="src\routes\PrivateRoute.html">
+                PrivateRoute.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="src\routes\PublicRoute.html">
+                PublicRoute.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="src\routes\RedirectIndex.html">
+                RedirectIndex.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="src\routes\Routes.html">
+                Routes.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="src\routes\authorizedRoutes.html">
+                authorizedRoutes.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+              
+            
+            
+            <li class="indent1">
+              <a class="source" href="src\serviceWorker.html">
+                serviceWorker.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+                
+                  <h4 class="indent1">utils/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="src\utils\CompoundIntl.html">
+                CompoundIntl.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="src\utils\Security.html">
+                Security.js
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+    
+    <div class="page">
+      <div class="header">
+        
+          
+          <h1 id="intro">Intro</h1>
+<p>It’s a React boilerplate with these technologies:</p>
+<ul>
+<li><strong>jest, enzyme</strong> code test and coverage report</li>
+<li><strong>flow</strong> type check</li>
+<li><strong>lint</strong> code style </li>
+<li><strong>docco</strong> in code documentation</li>
+<li><strong>scss, styled-components</strong> used for styling</li>
+<li><strong>redux, redux-persist, reselect</strong> store handling </li>
+<li><strong>saga</strong> logic handling</li>
+<li><strong>socket.io-client</strong> socket connection</li>
+<li><strong>react-intl</strong> translation</li>
+<li><strong>axios</strong> http request</li>
+<li><strong>lodash</strong> data manipulation</li>
+</ul>
+<h1 id="structure">Structure</h1>
+<ul>
+<li>public (index.html &amp; static assets)</li>
+<li>docs (generated by npm run doc)</li>
+<li>coverage (generated by npm test)</li>
+<li>src (source code of the project)</li>
+<li>assets (/images, /styles, /fonts, /translations …)</li>
+<li>components</li>
+<li>component A (it includes all js, custom style related to component)</li>
+<li>component B</li>
+<li>scenes</li>
+<li>scene A</li>
+<li>scene B</li>
+<li>configs (system config)</li>
+<li>history (browser routing history)</li>
+<li>locale (config default language &amp; translation wrapper)</li>
+<li>redux (reducer injector, saga injector,store validation,config redux &amp; reducer)</li>
+<li>Reactotron.js (config Reactotron debugger)</li>
+<li>Configs.js (our base project configs like api address,socket address,etc)</li>
+<li>Reactotron.js (config Reactotron debugger)</li>
+<li>routes (routes address,handling private route,handling public route)</li>
+<li>utils (Logger.js, Converter.js, FileUtils.js, …)</li>
+<li>network (http request,socket connection,..)</li>
+</ul>
+<h1 id="commands">Commands</h1>
+<ul>
+<li><strong>npm run doc</strong> generate docs locally</li>
+<li><strong>npm run github-pages</strong> generate docs locally and publish to github pages</li>
+<li><strong>npm start</strong> run the code</li>
+<li><strong>npm test</strong> run tests locally and generate json, html coverage report</li>
+<li><strong>npm run build-langs</strong> build translations files</li>
+</ul>
+<h1 id="resources">Resources</h1>
+<ul>
+<li>Test Report <a href="https://travis-ci.org/pixelsandcode/nodepack">https://travis-ci.org/pixelsandcode/nodepack</a></li>
+<li>Coverage Report <a href="https://coveralls.io/github/pixelsandcode/nodepack">https://coveralls.io/github/pixelsandcode/nodepack</a></li>
+<li>Documentation <a href="https://pixelsandcode.github.io/nodepack/src/index.html">https://pixelsandcode.github.io/nodepack/src/index.html</a></li>
+</ul>
+<h1 id="todo">TODO</h1>
+<ul>
+<li>generate doc from tests or link tests to code doc</li>
+<li>remove some extra comments</li>
+</ul>
+
+          
+        
+      </div>
+
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

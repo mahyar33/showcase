@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>App.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="..\docco.css" />
+</head>
+<body>
+  <div class="container">
+    
+      <div class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+          
+          
+          
+            
+            
+            
+            
+            <li class="indent0">
+              <a class="source" href="..\README.html">
+                README.md
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+                  <h4 class="indent0">misc/</h4>
+                
+              
+                
+                  <h4 class="indent1">tutorials/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\misc\tutorials\networkInstallation.html">
+                networkInstallation.md
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+                  <h4 class="indent0">src/</h4>
+                
+              
+              
+            
+            
+            <li class="indent1">
+              <a class="source" href="App.html">
+                App.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent1">
+              <a class="source" href="App.test.html">
+                App.test.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent1">
+              <a class="source" href="index.html">
+                index.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+                
+                  <h4 class="indent1">network/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="network\HttpRequest.html">
+                HttpRequest.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="network\SocketConnection.html">
+                SocketConnection.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+                
+                  <h4 class="indent1">routes/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="routes\PrivateRoute.html">
+                PrivateRoute.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="routes\PublicRoute.html">
+                PublicRoute.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="routes\RedirectIndex.html">
+                RedirectIndex.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="routes\Routes.html">
+                Routes.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="routes\authorizedRoutes.html">
+                authorizedRoutes.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+              
+            
+            
+            <li class="indent1">
+              <a class="source" href="serviceWorker.html">
+                serviceWorker.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+                
+                  <h4 class="indent1">utils/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="utils\CompoundIntl.html">
+                CompoundIntl.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="utils\Security.html">
+                Security.js
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+    
+    <div class="page">
+      <div class="header">
+        
+          <h1>App.js</h1>
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre><span class="hljs-keyword">import</span> <span class="hljs-string">'@babel/polyfill'</span>;
+<span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'./App.css'</span>;
+<span class="hljs-keyword">import</span> {Provider} <span class="hljs-keyword">from</span> <span class="hljs-string">"react-redux"</span>;
+<span class="hljs-keyword">import</span> { ConnectedRouter } <span class="hljs-keyword">from</span> <span class="hljs-string">'connected-react-router/immutable'</span>;
+<span class="hljs-keyword">import</span> history <span class="hljs-keyword">from</span> <span class="hljs-string">'./configs/history/history'</span>;
+<span class="hljs-keyword">import</span> LanguageProvider <span class="hljs-keyword">from</span> <span class="hljs-string">"./configs/languageProvider"</span>;
+<span class="hljs-keyword">import</span> { translationMessages } <span class="hljs-keyword">from</span> <span class="hljs-string">'./assets/translations/i18n'</span>;
+<span class="hljs-keyword">import</span> configureStore <span class="hljs-keyword">from</span> <span class="hljs-string">"./configs/redux/configureStore"</span>;
+<span class="hljs-keyword">import</span> {BrowserRouter <span class="hljs-keyword">as</span> Router} <span class="hljs-keyword">from</span> <span class="hljs-string">"react-router-dom"</span>;
+<span class="hljs-keyword">import</span> {Routes} <span class="hljs-keyword">from</span> <span class="hljs-string">"./routes/Routes"</span>;
+<span class="hljs-keyword">import</span> Temp <span class="hljs-keyword">from</span> <span class="hljs-string">'./scenes/Template/Template'</span>
+<span class="hljs-keyword">import</span> FontFaceObserver <span class="hljs-keyword">from</span> <span class="hljs-string">'fontfaceobserver'</span>;
+<span class="hljs-keyword">import</span> { PersistGate } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-persist/integration/react'</span></pre></div>
+        
+      
+        
+        <p>Observe loading of Open Sans (to remove open sans, remove the <link> tag in
+the index.html file and this observer)</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-keyword">const</span> openSansObserver = <span class="hljs-keyword">new</span> FontFaceObserver(<span class="hljs-string">'Open Sans'</span>, {});</pre></div>
+        
+      
+        
+        <p>When Open Sans is loaded, add a font-family using Open Sans to the body</p>
+
+        
+          <div class='highlight'><pre>openSansObserver.load().then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-built_in">document</span>.body.classList.add(<span class="hljs-string">'fontLoaded'</span>);
+});
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+
+  render() {
+      <span class="hljs-keyword">const</span> initialState = {};
+      <span class="hljs-keyword">const</span> {store,persistor} = configureStore(initialState, history);
+      <span class="hljs-built_in">console</span>.log(store)
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Provider</span> <span class="hljs-attr">store</span>=<span class="hljs-string">{store}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">PersistGate</span> <span class="hljs-attr">loading</span>=<span class="hljs-string">{null}</span> <span class="hljs-attr">persistor</span>=<span class="hljs-string">{persistor}</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">LanguageProvider</span> <span class="hljs-attr">messages</span>=<span class="hljs-string">{translationMessages}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">ConnectedRouter</span> <span class="hljs-attr">history</span>=<span class="hljs-string">{history}</span>&gt;</span>
+         {/*       <span class="hljs-tag">&lt;<span class="hljs-name">Temp</span>/&gt;</span>*/}
+                <span class="hljs-tag">&lt;<span class="hljs-name">Router</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Routes</span>/&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Router</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">ConnectedRouter</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">LanguageProvider</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">PersistGate</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Provider</span>&gt;</span></span>
+
+    );
+  }
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

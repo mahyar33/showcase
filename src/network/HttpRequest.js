@@ -1,15 +1,18 @@
-import {Component} from 'react'
 import axios from 'axios'
 import Security from '../utils/Security'
 
-
+//create an instance from axios
 let instance = axios.create()
+
+//you can choose defaults header
 instance.defaults.headers['Content-Type'] = undefined
 
 
 export const backEnd = `${window.location.protocol}` + "//" + process.env.REACT_APP_BACKEND;
 
-class HttpRequest extends Component {
+//this class uses for handling http request
+
+class HttpRequest {
 
 
     static post(url, params = {}, config = null) {

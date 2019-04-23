@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>HttpRequest.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="..\..\docco.css" />
+</head>
+<body>
+  <div class="container">
+    
+      <div class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+          
+          
+          
+            
+            
+            
+            
+            <li class="indent0">
+              <a class="source" href="..\..\README.html">
+                README.md
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+                  <h4 class="indent0">misc/</h4>
+                
+              
+                
+                  <h4 class="indent1">tutorials/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\..\misc\tutorials\networkInstallation.html">
+                networkInstallation.md
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+                  <h4 class="indent0">src/</h4>
+                
+              
+              
+            
+            
+            <li class="indent1">
+              <a class="source" href="..\App.html">
+                App.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent1">
+              <a class="source" href="..\App.test.html">
+                App.test.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent1">
+              <a class="source" href="..\index.html">
+                index.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+                
+                  <h4 class="indent1">network/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="HttpRequest.html">
+                HttpRequest.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="SocketConnection.html">
+                SocketConnection.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+                
+                  <h4 class="indent1">routes/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\routes\PrivateRoute.html">
+                PrivateRoute.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\routes\PublicRoute.html">
+                PublicRoute.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\routes\RedirectIndex.html">
+                RedirectIndex.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\routes\Routes.html">
+                Routes.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\routes\authorizedRoutes.html">
+                authorizedRoutes.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+              
+            
+            
+            <li class="indent1">
+              <a class="source" href="..\serviceWorker.html">
+                serviceWorker.js
+              </a>
+            </li>
+          
+            
+            
+            
+              
+              
+                
+              
+                
+                  <h4 class="indent1">utils/</h4>
+                
+              
+              
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\utils\CompoundIntl.html">
+                CompoundIntl.js
+              </a>
+            </li>
+          
+            
+            
+            
+            
+            <li class="indent2">
+              <a class="source" href="..\utils\Security.html">
+                Security.js
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+    
+    <div class="page">
+      <div class="header">
+        
+          <h1>HttpRequest.js</h1>
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">'axios'</span>
+<span class="hljs-keyword">import</span> Security <span class="hljs-keyword">from</span> <span class="hljs-string">'../utils/Security'</span></pre></div>
+        
+      
+        
+        <p>create an instance from axios</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-keyword">let</span> instance = axios.create()</pre></div>
+        
+      
+        
+        <p>you can choose defaults header</p>
+
+        
+          <div class='highlight'><pre>instance.defaults.headers[<span class="hljs-string">'Content-Type'</span>] = <span class="hljs-literal">undefined</span>
+
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> backEnd = <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">window</span>.location.protocol}</span>`</span> + <span class="hljs-string">"//"</span> + process.env.REACT_APP_BACKEND;</pre></div>
+        
+      
+        
+        <p>this class uses for handling http request</p>
+
+        
+          <div class='highlight'><pre>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HttpRequest</span> </span>{
+
+
+    <span class="hljs-keyword">static</span> post(url, params = {}, config = <span class="hljs-literal">null</span>) {
+        config = <span class="hljs-built_in">Object</span>.assign({}, config, {
+            <span class="hljs-attr">withCredentials</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">headers</span>: {
+                <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>
+            }
+        })
+        <span class="hljs-keyword">return</span> instance.post(backEnd + url, params, config)
+            .then(<span class="hljs-function"><span class="hljs-params">payload</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (payload.status !== <span class="hljs-number">200</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(payload.status)
+                <span class="hljs-keyword">return</span> payload
+            })
+            .catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (error.response) {
+                    <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">401</span>) {
+                        <span class="hljs-keyword">return</span> Security.signout().then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+                            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error.response)
+                        })
+                    }
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">500</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject({<span class="hljs-attr">data</span>: {<span class="hljs-attr">error_message</span>: <span class="hljs-string">'Server Error!'</span>}})
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">404</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject({<span class="hljs-attr">data</span>: {<span class="hljs-attr">error_message</span>: error.response.data.error_message}})
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error.response)
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error) {
+                    <span class="hljs-keyword">if</span> (error === <span class="hljs-number">401</span>) {
+                        <span class="hljs-keyword">return</span> Security.signout().then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+                            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error)
+                        })
+                    }
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error)
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-number">400</span>)
+                }
+            })
+    }
+
+    <span class="hljs-keyword">static</span> put(url, params = {}, config = <span class="hljs-literal">null</span>) {
+        config = <span class="hljs-built_in">Object</span>.assign({}, config, {
+            <span class="hljs-attr">withCredentials</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">headers</span>: {
+                <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>
+            }
+        })
+        <span class="hljs-keyword">return</span> instance.put(backEnd + url, params, config)
+            .then(<span class="hljs-function"><span class="hljs-params">payload</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (payload.status !== <span class="hljs-number">200</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(payload.status)
+                <span class="hljs-keyword">return</span> payload
+            })
+            .catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (error.response) {
+                    <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">401</span>) {
+                        <span class="hljs-keyword">return</span> Security.signout()
+                    }
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">500</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject({<span class="hljs-attr">data</span>: {<span class="hljs-attr">error_message</span>: <span class="hljs-string">'Server Error!'</span>}})
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">404</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject({<span class="hljs-attr">data</span>: {<span class="hljs-attr">error_message</span>: error.response.data.error_message}})
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error.response)
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error) {
+                    <span class="hljs-keyword">if</span> (error === <span class="hljs-number">401</span>) {
+                        <span class="hljs-keyword">return</span> Security.signout()
+                    }
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error)
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-number">400</span>)
+                }
+            })
+    }
+
+    <span class="hljs-keyword">static</span> patch(url, params = {}, config = <span class="hljs-literal">null</span>) {
+        config = <span class="hljs-built_in">Object</span>.assign({}, config, {
+            <span class="hljs-attr">withCredentials</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">headers</span>: {
+                <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>
+            }
+        })
+        <span class="hljs-keyword">return</span> instance.patch(backEnd + url, params, config)
+            .then(<span class="hljs-function"><span class="hljs-params">payload</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (payload.status !== <span class="hljs-number">200</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(payload.status)
+                <span class="hljs-keyword">return</span> payload
+            })
+            .catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (error.response) {
+                    <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">401</span>) {
+                        <span class="hljs-keyword">return</span> Security.signout()
+                    }
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">500</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject({<span class="hljs-attr">data</span>: {<span class="hljs-attr">error_message</span>: <span class="hljs-string">'Server Error!'</span>}})
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">404</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject({<span class="hljs-attr">data</span>: {<span class="hljs-attr">error_message</span>: error.response.data.error_message}})
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error.response)
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error) {
+                    <span class="hljs-keyword">if</span> (error === <span class="hljs-number">401</span>) {
+                        <span class="hljs-keyword">return</span> Security.signout()
+                    }
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error)
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-number">400</span>)
+                }
+            })
+    }
+
+    <span class="hljs-keyword">static</span> head(url, params = {}, config = <span class="hljs-literal">null</span>) {
+        config = <span class="hljs-built_in">Object</span>.assign({}, config, {
+            <span class="hljs-attr">withCredentials</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">headers</span>: {
+                <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>
+            }
+        })
+        <span class="hljs-keyword">return</span> instance.head(backEnd + url, params, config)
+            .then(<span class="hljs-function"><span class="hljs-params">payload</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (payload.status !== <span class="hljs-number">200</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(payload.status)
+                <span class="hljs-keyword">return</span> payload
+            })
+            .catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (error.response) {
+                    <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">401</span>) {
+                        Security.signout()
+                        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error.response)
+                    }
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">500</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject({<span class="hljs-attr">data</span>: {<span class="hljs-attr">error_message</span>: <span class="hljs-string">'Server Error!'</span>}})
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">404</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject({<span class="hljs-attr">data</span>: {<span class="hljs-attr">error_message</span>: error.response.data.error_message}})
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error.response)
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error) {
+                    <span class="hljs-keyword">if</span> (error === <span class="hljs-number">401</span>) {
+                        <span class="hljs-keyword">return</span> Security.signout()
+                    }
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error)
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-number">400</span>)
+                }
+            })
+    }
+
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">delete</span>(url) {
+        <span class="hljs-keyword">return</span> instance.delete(backEnd + url, {
+            <span class="hljs-attr">withCredentials</span>: <span class="hljs-literal">true</span>
+        })
+            .then(<span class="hljs-function"><span class="hljs-params">payload</span> =&gt;</span> {
+                <span class="hljs-keyword">return</span> payload
+            })
+            .catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (error.response) {
+                    <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">401</span>) {
+                        Security.signout()
+                    }
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error.response.status)
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error) {
+                    <span class="hljs-keyword">if</span> (error === <span class="hljs-number">401</span>) {
+                        Security.signout()
+                    }
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error)
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-number">400</span>)
+                }
+            })
+    }
+
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">get</span>(url, urlParams = {}, body = {}) {
+        <span class="hljs-keyword">return</span> instance.get(backEnd + url, {
+            <span class="hljs-attr">params</span>: urlParams, ...{<span class="hljs-attr">withCredentials</span>: <span class="hljs-literal">true</span>}, ...{<span class="hljs-attr">data</span>: body}
+        })
+            .then(<span class="hljs-function"><span class="hljs-params">payload</span> =&gt;</span> {
+                <span class="hljs-keyword">return</span> payload
+            })
+            .catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (error.response) {
+                    <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">401</span>) {
+                        Security.signout()
+                    }
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error.response)
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error) {
+                    <span class="hljs-keyword">if</span> (error === <span class="hljs-number">401</span>) {
+                        Security.signout()
+                    }
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error)
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-number">400</span>)
+                }
+            })
+    }
+
+    <span class="hljs-keyword">static</span> postFile(url, formData) {
+        <span class="hljs-keyword">const</span> config = {
+            <span class="hljs-attr">headers</span>: {
+                <span class="hljs-string">'content-type'</span>: <span class="hljs-string">'multipart/form-data'</span>,
+            },
+            <span class="hljs-attr">withCredentials</span>: <span class="hljs-literal">true</span>,
+        };
+        <span class="hljs-keyword">return</span> instance.post(backEnd + url, formData, config)
+            .then(<span class="hljs-function"><span class="hljs-params">payload</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (payload.status !== <span class="hljs-number">200</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(payload.status);
+                <span class="hljs-keyword">return</span> payload;
+            })
+            .catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (error.response) {
+                    <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">401</span>) {
+                        <span class="hljs-keyword">return</span> Security.signout().then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+                            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error.response)
+                        })
+                    }
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">500</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject({<span class="hljs-attr">data</span>: {<span class="hljs-attr">error_message</span>: <span class="hljs-string">'Server Error!'</span>}})
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">404</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject({<span class="hljs-attr">data</span>: {<span class="hljs-attr">error_message</span>: error.response.data.error_message}})
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error.response)
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error) {
+                    <span class="hljs-keyword">if</span> (error === <span class="hljs-number">401</span>) {
+                        <span class="hljs-keyword">return</span> Security.signout().then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+                            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error)
+                        })
+                    }
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error)
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-number">400</span>)
+                }
+            });
+    };
+
+    <span class="hljs-keyword">static</span> fileUpload(url, formData, event) {
+
+        <span class="hljs-keyword">const</span> config = {
+            <span class="hljs-attr">withCredentials</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">headers</span>: {
+                <span class="hljs-string">'content-type'</span>: <span class="hljs-string">'multipart/form-data'</span>
+            },
+            <span class="hljs-attr">onUploadProgress</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">progressEvent</span>) </span>{
+                <span class="hljs-keyword">let</span> percentCompleted = <span class="hljs-built_in">Math</span>.round((progressEvent.loaded * <span class="hljs-number">100</span>) / progressEvent.total)
+
+            }
+        }
+        <span class="hljs-keyword">return</span> instance.post(backEnd + url, formData, config)
+            .then(<span class="hljs-function"><span class="hljs-params">payload</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (payload.status !== <span class="hljs-number">200</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(payload.status)
+                <span class="hljs-keyword">return</span> payload
+            })
+            .catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (error.response) {
+                    <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">401</span>) {
+                        <span class="hljs-keyword">return</span> Security.signout().then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+                            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error.response)
+                        })
+                    }
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">500</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject({<span class="hljs-attr">data</span>: {<span class="hljs-attr">error_message</span>: <span class="hljs-string">'Server Error!'</span>}})
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">404</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject({<span class="hljs-attr">data</span>: {<span class="hljs-attr">error_message</span>: error.response.data.error_message}})
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error.response)
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error) {
+                    <span class="hljs-keyword">if</span> (error === <span class="hljs-number">401</span>) {
+                        <span class="hljs-keyword">return</span> Security.signout().then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+                            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error)
+                        })
+                    }
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error)
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-number">400</span>)
+                }
+            })
+    }
+
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> HttpRequest</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>
