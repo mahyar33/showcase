@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>Network Installation</title>
+  <title>Network Usage</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
   <link rel="stylesheet" media="all" href="..\..\docco.css" />
@@ -43,8 +43,8 @@
             
             
             <li class="indent2">
-              <a class="source" href="networkInstallation.html">
-                networkInstallation.md
+              <a class="source" href="networkUsage.html">
+                networkUsage.md
               </a>
             </li>
           
@@ -229,20 +229,26 @@
       <div class="header">
         
           
-          <h1 id="network-installation">Network Installation</h1>
-<ul>
-<li><strong>import httprequest</strong> </li>
-<li><strong>use static promise functions for rest api(post,get,put,..)</strong> 
-successful</li>
-<li><em>notice:it’s like ordinary promise if it’s successful you get answers in ‘then’ if not you handle it in catch*</em> </li>
-</ul>
-<h2 id="sample-code">sample code</h2>
-<pre><code>axios.post('/create', {a:'car'})
-.then((response) =&gt; 
-{
+          <h1 id="network-usage">Network Usage</h1>
+<p>You need to import <a href="/src/network/HttpRequest.html">HttpRequest</a> for communicating with APIs.
+This will provide set of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a> methods such as HttpRequest.post, HttpRequest.get, HttpRequest.put and … to get data or submit data to the restful API.  </p>
+<h2 id="sample-post-request">Sample POST Request</h2>
+<p><strong>Notice : Other methods usage(get,put,…) are the same</strong></p>
+<pre><code>HttpRequest.post('/cars/create', { make: 'Mazda' })
+.then((response) =&gt; {
 //if successful
-}
-)
+})
+.catch((error) =&gt; {
+//if not
+});</code></pre><h2 id="sample-postfile-request">Sample PostFile Request</h2>
+<p>You can check <a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">FormData</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/File">File</a> before reading this sample.</p>
+<pre><code>let formData = new FormData();
+//file is your binary file
+formData.append("image", files);
+HttpRequest.postFile('/cars/upload', formData)
+.then((response) =&gt; {
+//if successful
+})
 .catch((error) =&gt; {
 //if not
 });</code></pre>

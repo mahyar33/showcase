@@ -3,10 +3,10 @@
  */
 
 import {call, put, select, takeLatest} from 'redux-saga/effects';
-import {makeTemp} from './selectors';
+import {makeTemp} from '../../redux/selectors/selectors';
 import HttpRequest from "../../network/HttpRequest";
-import {tempAction} from "./actions";
-import {temp} from "./constants";
+import {tempAction} from "../../redux/actions/actions";
+import {temp} from "../../redux/constant/constants";
 
 /**
  * Github repos request/response handler

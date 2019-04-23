@@ -1,4 +1,4 @@
-import { temp } from './constants';
+import { temp } from '../constant/constants';
 
 
 export function tempAction(name) {

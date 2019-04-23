@@ -1,268 +1,123 @@
+// `HttpRequest` is using an instance of `axios` for customisation such as
+// credentials, content type and adding the default base url to all calls.
+// Also it intercepts all calls for error handling and authentication, authorisation fallbacks
 import axios from 'axios'
 import Security from '../utils/Security'
 
-//create an instance from axios
-let instance = axios.create()
-
-//you can choose defaults header
+export const backEnd = `${window.location.protocol}` + "//" + process.env.REACT_APP_BACKEND;
+let instance = axios.create({
+    baseURL: backEnd,
+    withCredentials: true
+})
+// You can add your default headers here
 instance.defaults.headers['Content-Type'] = undefined
 
 
-export const backEnd = `${window.location.protocol}` + "//" + process.env.REACT_APP_BACKEND;
-
-//this class uses for handling http request
-
+// All requests are having *config* as an optional parameter which is `axios` [requests configs](https://github.com/axios/axios#request-config).
 class HttpRequest {
 
-
     static post(url, params = {}, config = null) {
-        config = Object.assign({}, config, {
-            withCredentials: true, headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        return instance.post(backEnd + url, params, config)
+        return instance.post(url, params, config)
             .then(payload => {
-                if (payload.status !== 200) return Promise.reject(payload.status)
-                return payload
+                HttpRequest.statusChecking(payload)
             })
             .catch(error => {
-                if (error.response) {
-                    if (error.response.status === 401) {
-                        return Security.signout().then(() => {
-                            return Promise.reject(error.response)
-                        })
-                    }
-                    else if (error.response.status === 500) return Promise.reject({data: {error_message: 'Server Error!'}})
-                    else if (error.response.status === 404) return Promise.reject({data: {error_message: error.response.data.error_message}})
-                    return Promise.reject(error.response)
-                } else if (error) {
-                    if (error === 401) {
-                        return Security.signout().then(() => {
-                            return Promise.reject(error)
-                        })
-                    }
-                    return Promise.reject(error)
-                } else {
-                    return Promise.reject(400)
-                }
+                HttpRequest.errorHandling(error);
             })
     }
 
     static put(url, params = {}, config = null) {
-        config = Object.assign({}, config, {
-            withCredentials: true, headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        return instance.put(backEnd + url, params, config)
+        return instance.put(url, params, config)
             .then(payload => {
-                if (payload.status !== 200) return Promise.reject(payload.status)
-                return payload
+                HttpRequest.statusChecking(payload)
             })
             .catch(error => {
-                if (error.response) {
-                    if (error.response.status === 401) {
-                        return Security.signout()
-                    }
-                    else if (error.response.status === 500) return Promise.reject({data: {error_message: 'Server Error!'}})
-                    else if (error.response.status === 404) return Promise.reject({data: {error_message: error.response.data.error_message}})
-                    return Promise.reject(error.response)
-                } else if (error) {
-                    if (error === 401) {
-                        return Security.signout()
-                    }
-                    return Promise.reject(error)
-                } else {
-                    return Promise.reject(400)
-                }
+                HttpRequest.errorHandling(error);
             })
     }
 
     static patch(url, params = {}, config = null) {
-        config = Object.assign({}, config, {
-            withCredentials: true, headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        return instance.patch(backEnd + url, params, config)
+        return instance.patch(url, params, config)
             .then(payload => {
-                if (payload.status !== 200) return Promise.reject(payload.status)
-                return payload
+                HttpRequest.statusChecking(payload)
             })
             .catch(error => {
-                if (error.response) {
-                    if (error.response.status === 401) {
-                        return Security.signout()
-                    }
-                    else if (error.response.status === 500) return Promise.reject({data: {error_message: 'Server Error!'}})
-                    else if (error.response.status === 404) return Promise.reject({data: {error_message: error.response.data.error_message}})
-                    return Promise.reject(error.response)
-                } else if (error) {
-                    if (error === 401) {
-                        return Security.signout()
-                    }
-                    return Promise.reject(error)
-                } else {
-                    return Promise.reject(400)
-                }
+                HttpRequest.errorHandling(error);
             })
     }
 
     static head(url, params = {}, config = null) {
+        return instance.head(url, params, config)
+            .then(payload => {
+                HttpRequest.statusChecking(payload)
+            })
+            .catch(error => {
+                HttpRequest.errorHandling(error);
+            })
+    }
+
+    static delete(url, params = {}, config = null) {
+        return instance.delete(url, params, config)
+            .then(payload => {
+                HttpRequest.statusChecking(payload)
+            })
+            .catch(error => {
+                HttpRequest.errorHandling(error);
+            })
+    }
+
+    static get(url, urlParams = {}, config = null) {
         config = Object.assign({}, config, {
-            withCredentials: true, headers: {
-                'Content-Type': 'application/json'
-            }
+            params: urlParams,
         })
-        return instance.head(backEnd + url, params, config)
+        return instance.get(url, config)
             .then(payload => {
-                if (payload.status !== 200) return Promise.reject(payload.status)
-                return payload
+                HttpRequest.statusChecking(payload)
             })
             .catch(error => {
-                if (error.response) {
-                    if (error.response.status === 401) {
-                        Security.signout()
-                        return Promise.reject(error.response)
-                    }
-                    else if (error.response.status === 500) return Promise.reject({data: {error_message: 'Server Error!'}})
-                    else if (error.response.status === 404) return Promise.reject({data: {error_message: error.response.data.error_message}})
-                    return Promise.reject(error.response)
-                } else if (error) {
-                    if (error === 401) {
-                        return Security.signout()
-                    }
-                    return Promise.reject(error)
-                } else {
-                    return Promise.reject(400)
-                }
+                HttpRequest.errorHandling(error);
             })
     }
 
-    static delete(url) {
-        return instance.delete(backEnd + url, {
-            withCredentials: true
-        })
-            .then(payload => {
-                return payload
-            })
-            .catch(error => {
-                if (error.response) {
-                    if (error.response.status === 401) {
-                        Security.signout()
-                    }
-                    return Promise.reject(error.response.status)
-                } else if (error) {
-                    if (error === 401) {
-                        Security.signout()
-                    }
-                    return Promise.reject(error)
-                } else {
-                    return Promise.reject(400)
-                }
-            })
-    }
-
-    static get(url, urlParams = {}, body = {}) {
-        return instance.get(backEnd + url, {
-            params: urlParams, ...{withCredentials: true}, ...{data: body}
-        })
-            .then(payload => {
-                return payload
-            })
-            .catch(error => {
-                if (error.response) {
-                    if (error.response.status === 401) {
-                        Security.signout()
-                    }
-                    return Promise.reject(error.response)
-                } else if (error) {
-                    if (error === 401) {
-                        Security.signout()
-                    }
-                    return Promise.reject(error)
-                } else {
-                    return Promise.reject(400)
-                }
-            })
-    }
-
-    static postFile(url, formData) {
-        const config = {
+    static postFile(url, formData, config = null) {
+        config = Object.assign({}, config, {
             headers: {
                 'content-type': 'multipart/form-data',
             },
-            withCredentials: true,
-        };
-        return instance.post(backEnd + url, formData, config)
+        })
+        return instance.post(url, formData, config)
             .then(payload => {
-                if (payload.status !== 200) return Promise.reject(payload.status);
-                return payload;
+                HttpRequest.statusChecking(payload)
             })
             .catch(error => {
-                if (error.response) {
-                    if (error.response.status === 401) {
-                        return Security.signout().then(() => {
-                            return Promise.reject(error.response)
-                        })
-                    }
-                    else if (error.response.status === 500) return Promise.reject({data: {error_message: 'Server Error!'}})
-                    else if (error.response.status === 404) return Promise.reject({data: {error_message: error.response.data.error_message}})
-                    return Promise.reject(error.response)
-                } else if (error) {
-                    if (error === 401) {
-                        return Security.signout().then(() => {
-                            return Promise.reject(error)
-                        })
-                    }
-                    return Promise.reject(error)
-                } else {
-                    return Promise.reject(400)
-                }
+                HttpRequest.errorHandling(error);
             });
     };
-
-    static fileUpload(url, formData, event) {
-
-        const config = {
-            withCredentials: true,
-            headers: {
-                'content-type': 'multipart/form-data'
-            },
-            onUploadProgress: function (progressEvent) {
-                let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-
-            }
-        }
-        return instance.post(backEnd + url, formData, config)
-            .then(payload => {
-                if (payload.status !== 200) return Promise.reject(payload.status)
-                return payload
-            })
-            .catch(error => {
-                if (error.response) {
-                    if (error.response.status === 401) {
-                        return Security.signout().then(() => {
-                            return Promise.reject(error.response)
-                        })
-                    }
-                    else if (error.response.status === 500) return Promise.reject({data: {error_message: 'Server Error!'}})
-                    else if (error.response.status === 404) return Promise.reject({data: {error_message: error.response.data.error_message}})
-                    return Promise.reject(error.response)
-                } else if (error) {
-                    if (error === 401) {
-                        return Security.signout().then(() => {
-                            return Promise.reject(error)
-                        })
-                    }
-                    return Promise.reject(error)
-                } else {
-                    return Promise.reject(400)
-                }
-            })
+    //Push other status into error handling
+    static statusChecking = (payload) => {
+        if (payload.status !== 200) return Promise.reject(payload.status)
+        return Promise.resolve(payload)
     }
-
+    static errorHandling = (error) => {
+        if (error.response) {
+            if (error.response.status === 401) {
+                return Security.signout().then(() => {
+                    return Promise.reject(error.response)
+                })
+            } else if (error.response.status === 500) return Promise.reject({data: {error_message: 'Server Error!'}})
+            else if (error.response.status === 404) return Promise.reject({data: {error_message: error.response.data.error_message}})
+            return Promise.reject(error.response)
+        } else if (error) {
+            if (error === 401) {
+                return Security.signout().then(() => {
+                    return Promise.reject(error)
+                })
+            }
+            return Promise.reject(error)
+        } else {
+            return Promise.reject(400)
+        }
+    }
 }
 
 export default HttpRequest
