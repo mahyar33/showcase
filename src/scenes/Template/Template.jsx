@@ -4,29 +4,30 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
+import { Link } from 'react-router-dom';
 import injectSaga from '../../configs/redux/injectSaga';
 import injectReducer from '../../configs/redux/injectReducer';
-import tempReducer from './reducer';
+import tempReducer from '../../redux/reducers/reducer';
 import tempSaga from './saga';
-import { tempAction } from './actions';
+import { tempAction } from '../../redux/actions/actions';
+import { changeLocale } from '../../configs/languageProvider/actions';
 
-
-class Test extends Component {
+class Temp extends Component {
   componentDidMount() {
     console.log('store', this.context.store);
   }
 
   render() {
-    return <div>ok</div>;
+    return <Link to="/test"><div>hi</div></Link>;
   }
 }
 
-Test.propTypes = {};
+Temp.propTypes = {};
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onSubmitForm: (evt) => {
-      dispatch(tempAction(evt));
+    onSubmitForm: () => {
+      dispatch(changeLocale('de'));
     },
   };
 }
@@ -38,11 +39,12 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'test', reducer: tempReducer });
-const withSaga = injectSaga({ key: 'test', saga: tempSaga });
+const withReducer = injectReducer({ key: 'temp', reducer: tempReducer });
+const withSaga = injectSaga({ key: 'temp', saga: tempSaga });
 
 export default compose(
   withSaga,
+  withReducer,
   withConnect,
   injectIntl,
-)(Test);
+)(Temp);

@@ -2,12 +2,11 @@
  * Homepage selectors
  */
 
-import {createSelector} from 'reselect';
-import {initialState} from '../reducers/reducer';
+import { createSelector } from 'reselect';
+import { initialState } from '../reducers/reducer';// eslint-disable-line
 
-const selectHome = state =>  state.temp;
+const selectHome = state => state.temp;
 
-const makeTemp = () =>
-    createSelector(selectHome, homeState => homeState.get('temp'));
+const makeTemp = () => createSelector(selectHome, homeState => homeState.get('temp'));
 
-export {selectHome, makeTemp};
+export { selectHome, makeTemp };

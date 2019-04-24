@@ -1,9 +1,10 @@
+/*
+  Validate the shape of redux store.
+*/
+
 import { conformsTo, isFunction, isObject } from 'lodash';
 import invariant from 'invariant';
 
-/**
- * Validate the shape of redux store
- */
 export default function checkStore(store) {
   const shape = {
     dispatch: isFunction,

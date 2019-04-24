@@ -1,15 +1,13 @@
-/**
- *
- * ProgressBar
- *
+/*
+It uses to implement ProgressBar.
 */
 
-import React, {PropTypes} from 'react'
-import Wrapper from './Wrapper'
-import Percent from './Percent'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Wrapper from './Wrapper';
+import Percent from './Percent';
 
 class ProgressBar extends React.Component {
-
   static defaultProps = {
     percent: -1,
     autoIncrement: true,
@@ -119,7 +117,9 @@ class ProgressBar extends React.Component {
 }
 
 ProgressBar.propTypes = {
-  percent: PropTypes.number.isRequired,
+  percent: PropTypes.number,
+  autoIncrement: PropTypes.bool,// eslint-disable-line
+  intervalTime: PropTypes.number,// eslint-disable-line
 };
 
 export default ProgressBar;

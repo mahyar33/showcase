@@ -1,14 +1,13 @@
-/**
- * Create the store with dynamic reducers
- */
+/*
+  Create the store with dynamic reducers.
+*/
 
 import { createStore, applyMiddleware, compose } from 'redux';
-import { fromJS } from 'immutable';
 import { routerMiddleware } from 'connected-react-router/immutable';
 import createSagaMiddleware from 'redux-saga';
+import { persistStore } from 'redux-persist';
 import createReducer from './reducers';
-import { persistStore } from 'redux-persist'
-import Reactotron from '../ReactotronConfig'
+import Reactotron from '../Reactotron';
 
 const sagaMonitor = Reactotron.createSagaMonitor();
 const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
@@ -19,14 +18,13 @@ export default function configureStore(initialState = {}, history) {
   // 2. routerMiddleware: Syncs the location/URL path to the state
   const middlewares = [sagaMiddleware, routerMiddleware(history)];
 
-  const enhancers = [applyMiddleware(...middlewares),Reactotron.createEnhancer()];
+  const enhancers = [applyMiddleware(...middlewares), Reactotron.createEnhancer()];
 
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose
   /* eslint-disable no-underscore-dangle, indent */
-  const composeEnhancers =
-    process.env.NODE_ENV !== 'production' &&
-    typeof window === 'object' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  const composeEnhancers = process.env.NODE_ENV !== 'production'
+    && typeof window === 'object'
+    && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
       : compose;
   /* eslint-enable */
@@ -42,15 +40,14 @@ export default function configureStore(initialState = {}, history) {
   store.injectedReducers = {}; // Reducer registry
   store.injectedSagas = {}; // Saga registry
 
-  // Make reducers hot reloadable, see http://mxs.is/googmo
+  // Make reducers hot [reloadable](http://mxs.is/googmo)
   /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./reducers', () => {
       store.replaceReducer(createReducer(store.injectedReducers));
     });
   }
-  const persistor =persistStore(store);
+  const persistor = persistStore(store);
 
-  return {store,persistor};
-
+  return { store, persistor };
 }
