@@ -1,3 +1,4 @@
+// clarifying our security rules and also roles managent
 import { Component } from 'react';
 
 
@@ -11,7 +12,7 @@ class Security extends Component {
     return roles.indexOf(localStorage.getItem('role')) > -1;
   }
 
-  static signout(cb) {
+  static signout() {
 
   }
 }

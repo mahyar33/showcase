@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -9,7 +8,6 @@ import injectSaga from '../../configs/redux/injectSaga';
 import injectReducer from '../../configs/redux/injectReducer';
 import tempReducer from '../../redux/reducers/reducer';
 import tempSaga from './saga';
-import { tempAction } from '../../redux/actions/actions';
 import { changeLocale } from '../../configs/languageProvider/actions';
 
 class Temp extends Component {

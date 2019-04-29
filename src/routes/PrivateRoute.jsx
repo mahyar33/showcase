@@ -1,3 +1,6 @@
+// Prevents user can't enter private routes before authentication
+// by using [`Security`](../utils/Security.html) class.
+
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';

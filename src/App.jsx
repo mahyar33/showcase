@@ -1,3 +1,4 @@
+// Project start from this component
 import '@babel/polyfill';
 import React from 'react';
 import './App.css';
@@ -27,7 +28,6 @@ openSansObserver.load()
 const App = () => {
   const initialState = {};
   const { store, persistor } = configureStore(initialState, history);
-  console.log(store);
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
