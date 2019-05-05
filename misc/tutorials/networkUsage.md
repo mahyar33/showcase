@@ -1,6 +1,6 @@
 # Network Usage 
 
-You need to import [HttpRequest](/src/network/HttpRequest.html) for communicating with APIs.
+You need to import [HttpRequest](/src/configs/network/HttpRequest.html) for communicating with APIs.
 This will provide set of [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) methods such as HttpRequest.post, HttpRequest.get, HttpRequest.put and ... to get data or submit data to the restful API.  
 
 ## Sample POST Request
