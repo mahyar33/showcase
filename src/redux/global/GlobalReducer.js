@@ -1,18 +1,22 @@
 import { fromJS } from 'immutable'
 
-import { networkStatus } from './constants'
+import { SET_NETWORK_STATUS, SET_TOP_MESSAGE, CLEAR_TOP_MESSAGE } from './GlobalConstants'
 
 export const initialState = fromJS({
 
 })
 
-function global (state = initialState, action) {
+function globalReducer (state = initialState, action) {
   switch (action.type) {
-    case networkStatus:
-      return state.set('network', action.payload)
+    case SET_NETWORK_STATUS:
+      return state.set('networkStatus', action.payload)
+    case SET_TOP_MESSAGE:
+      return state.set('topMessage', action.payload)
+    case CLEAR_TOP_MESSAGE:
+      return state.set('topMessage', '')
     default:
       return state
   }
 }
 
-export default global
+export default globalReducer

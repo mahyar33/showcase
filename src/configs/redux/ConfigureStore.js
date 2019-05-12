@@ -11,16 +11,18 @@ import createSagaMiddleware from 'redux-saga'
 import { persistStore } from 'redux-persist'
 import CreateReducer from './Reducers'
 import Reactotron from '../Reactotron'
+import createReduxPromiseListener from 'redux-promise-listener'
+import history from '../History'
 
 const sagaMonitor = Reactotron.createSagaMonitor()
 const sagaMiddleware = createSagaMiddleware({ sagaMonitor })
+const reduxPromiseListener = createReduxPromiseListener()
+const initialState = {}
+const middlewares = [sagaMiddleware, routerMiddleware(history), reduxPromiseListener.middleware]
 
-export default function ConfigureStore (initialState = {}, history) {
-  const middlewares = [sagaMiddleware, routerMiddleware(history)]
+const enhancers = [applyMiddleware(...middlewares), Reactotron.createEnhancer()]
 
-  const enhancers = [applyMiddleware(...middlewares), Reactotron.createEnhancer()]
-
-  /* eslint-disable no-underscore-dangle, indent */
+/* eslint-disable no-underscore-dangle, indent */
   const composeEnhancers = process.env.NODE_ENV !== 'production' &&
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -28,24 +30,16 @@ export default function ConfigureStore (initialState = {}, history) {
       : compose
   /* eslint-enable */
 
-  const store = createStore(
-    CreateReducer(),
-    initialState,
-    composeEnhancers(...enhancers)
-  )
+const store = createStore(
+  CreateReducer(),
+  initialState,
+  composeEnhancers(...enhancers)
+)
 
-  // Extensions
-  store.runSaga = sagaMiddleware.run
-  store.injectedReducers = {}
-  store.injectedSagas = {}
+// Extensions
+store.runSaga = sagaMiddleware.run
+const persistor = persistStore(store)
 
-  /* istanbul ignore next */
-  if (module.hot) {
-    module.hot.accept('./Reducers', () => {
-      store.replaceReducer(CreateReducer(store.injectedReducers))
-    })
-  }
-  const persistor = persistStore(store)
+export { store, persistor }
 
-  return { store, persistor }
-}
+export const promiseListener = reduxPromiseListener

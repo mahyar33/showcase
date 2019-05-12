@@ -1,8 +1,14 @@
 /* global sessionStorage, localStorage */
 // Clarifying our security rules and also roles management
-import { Component } from 'react'
 
-class Security extends Component {
+class Security {
+  static #session;
+  static set session (session) {
+    this.#session = session
+  }
+  static get session () {
+    return this.#session
+  }
   static isAuthenticated () {
     return sessionStorage.getItem('Auth') === 'true'
   }

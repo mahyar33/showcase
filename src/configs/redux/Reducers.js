@@ -11,10 +11,14 @@ import immutableTransform from 'redux-persist-transform-immutable'
 import storage from 'redux-persist/lib/storage'
 import languageProviderReducer from '../../redux/locale/LocaleReducer'
 import History from '../History'
+import UserReducer from '../../redux/user/UserReducer'
+import globalReducer from '../../redux/global/GlobalReducer'
 
 export default function CreateReducer (injectedReducers = {}) {
   const rootReducer = combineReducers({
     language: languageProviderReducer,
+    user: UserReducer,
+    global: globalReducer,
     router: connectRouter(History),
     ...injectedReducers
   })
@@ -23,7 +27,7 @@ export default function CreateReducer (injectedReducers = {}) {
     transforms: [immutableTransform()],
     key: 'root',
     storage,
-    whitelist: ['global', 'language']
+    whitelist: ['global', 'language', 'user']
   }
   return persistReducer(persistConfig, rootReducer)
 }

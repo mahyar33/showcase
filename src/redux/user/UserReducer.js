@@ -1,18 +1,17 @@
 import { fromJS } from 'immutable'
-
-import { temp } from './constants'
+import { SET_SESSION } from './UserConstants';
 
 export const initialState = fromJS({
 
 })
 
-function tempReducer (state = initialState, action) {
+function UserReducer (state = initialState, action) {
   switch (action.type) {
-    case temp:
-      return state.set('temp', '')
+    case SET_SESSION:
+      return state.set('session', action.payload)
     default:
       return state
   }
 }
 
-export default tempReducer
+export default UserReducer

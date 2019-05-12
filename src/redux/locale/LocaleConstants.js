@@ -4,4 +4,4 @@
  *
  */
 
-export const CHANGE_LOCALE = 'app/LanguageToggle/CHANGE_LOCALE';// eslint-disable-line
+export const SET_LOCALE = 'locale/SET_LOCALE';// eslint-disable-line
