@@ -2,8 +2,8 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 
-const Redirect = () => (
+const RedirectIndex = () => (
   <Redirect to='/dashboard' />
 )
 
-export default Redirect
+export default RedirectIndex

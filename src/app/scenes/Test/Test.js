@@ -7,7 +7,7 @@ import { injectIntl } from 'react-intl'
 
 class Test extends Component {
   componentDidMount () {
-    console.log('store', this.context.store)
+
   }
 
   render () {

@@ -6,29 +6,30 @@ import { Redirect, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Security from '../network/Security'
 
-const Private = ({ component: Component, ...rest }) => (
+const Private = ({ component: Component, props, ...rest }) => (
   <Route
     {...rest}
-    render={props => (
+    render={routeProps => (
       !Security.isAuthenticated() ? (// eslint-disable-line
         <Redirect to={{
           pathname: '/login',
-          state: { from: props.location },// eslint-disable-line
+          state: { from: routeProps.location },// eslint-disable-line
         }}
         />
 
       ) : rest.roles && !Security.isAuthorized(rest.roles) ? (
         <Redirect to={{
           pathname: '/dashboard',
-          state: { from: props.location },// eslint-disable-line
+          state: { from: routeProps.location },// eslint-disable-line
         }}
         />
-      ) : (<Component {...props} />)
+      ) : (<Component {...routeProps} {...props} />)
     )}
   />
 )
 
 Private.propTypes = {
-  component: PropTypes.objectOf(PropTypes.object).isRequired
+  component: PropTypes.object.isRequired,
+  props: PropTypes.object
 }
 export default Private

@@ -5,11 +5,11 @@ import { compose } from 'redux'
 import { createStructuredSelector } from 'reselect'
 import { injectIntl } from 'react-intl'
 import { Link } from 'react-router-dom'
-import { changeLocale } from '../../../redux/locale/LocaleActions'
+import { setLocale } from '../../../redux/locale/LocaleActions'
 
 class Temp extends Component {
   componentDidMount () {
-    console.log('store', this.context.store)
+
   }
 
   render () {
@@ -22,7 +22,7 @@ Temp.propTypes = {}
 export function mapDispatchToProps (dispatch) {
   return {
     onSubmitForm: () => {
-      dispatch(changeLocale('de'))
+      dispatch(setLocale('de'))
     }
   }
 }

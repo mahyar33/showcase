@@ -12,9 +12,9 @@ import { translationMessages } from './assets/translations/I18n'
 import { persistor, store } from './configs/redux/ConfigureStore'
 import Routes from './routes/Routes'
 import SagaRunner from './configs/redux/SagaRunner'
-
 import { runDI } from './configs/DependencyInjection'
 import GlobalServices from './services/GlobalServices'
+
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
 const openSansObserver = new FontFaceObserver('Open Sans', {})
@@ -45,7 +45,7 @@ class App extends Component {
               {/*       <Temp/> */}
               <Router>
                 <Routes />
-              </Router>
+;              </Router>
             </ConnectedRouter>
           </Locale>
         </PersistGate>

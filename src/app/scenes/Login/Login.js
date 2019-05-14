@@ -6,16 +6,17 @@ import { createStructuredSelector } from 'reselect'
 import { injectIntl } from 'react-intl'
 import { Button, Card, Form, Grid, Header, Message } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
-import { loginAction } from '../../../redux/user/UserActions'
+import { loginAction, setRoleAction } from '../../../redux/user/UserActions'
 import { makeSelectSession } from '../../../redux/user/UserSelectors'
 import { makeSelectTopMessage } from '../../../redux/global/GlobalSelectors'
 import { clearTopMessageAction, setTopMessageAction } from '../../../redux/global/GlobalActions'
 
 class Login extends Component {
   componentDidMount () {
-
+    this.props.setRole('USER')
   }
 login=() => {
+  this.props.history.push('/dashboard')
   this.props.onSubmitForm.asyncFunction('ok').then(
     resolvePayload => {
 
@@ -76,6 +77,9 @@ const mapDispatchToProps = dispatch => {
     ),
     clearTopMessage: (params) => (
       dispatch(clearTopMessageAction(params))
+    ),
+    setRole: (params) => (
+      dispatch(setRoleAction(params))
     )
 
   }
