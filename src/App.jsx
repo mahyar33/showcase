@@ -13,7 +13,7 @@ import { persistor, store } from './configs/redux/ConfigureStore'
 import Routes from './routes/Routes'
 import SagaRunner from './configs/redux/SagaRunner'
 import { runDI } from './configs/DependencyInjection'
-import GlobalServices from './services/GlobalServices'
+import Health from './configs/network/Health'
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -26,14 +26,18 @@ openSansObserver.load()
   })
 
 class App extends Component {
+  constructor (props) {
+    super(props)
+    runDI()
+  }
   componentDidMount () {
     SagaRunner(store)
-    runDI()
-    GlobalServices.checkVersion().then(payload => {
+    Health.runHealthCheck()
+    /*   GlobalServices.checkVersion().then(payload => {
       console.log(payload, 'no')
     }).catch(e => {
-      console.log('ok', e.message)
-    })
+
+    }) */
   }
 
   render () {
@@ -45,7 +49,7 @@ class App extends Component {
               {/*       <Temp/> */}
               <Router>
                 <Routes />
-;              </Router>
+              </Router>
             </ConnectedRouter>
           </Locale>
         </PersistGate>

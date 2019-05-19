@@ -74,7 +74,7 @@ class Gateway {
     static errorHandling = (error) => {
       if (error.response) {
         if (error.response.status === 401) {
-          return Security.signout().then(() => Promise.reject(error.response))
+          return Security.logout().then(() => Promise.reject(error.response))
         } if (error.response.status === 500) return Promise.reject(new Error('Server Error!'))
         if (error.response.status === 404) {
           return Promise.reject(
@@ -84,7 +84,7 @@ class Gateway {
         return Promise.reject(error.response)
       } if (error) {
         if (error === 401) {
-          return Security.signout().then(() => Promise.reject(error))
+          return Security.logout().then(() => Promise.reject(error))
         }
         return Promise.reject(error)
       }

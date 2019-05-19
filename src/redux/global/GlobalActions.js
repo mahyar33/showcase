@@ -1,9 +1,33 @@
-import { SET_NETWORK_STATUS, SET_TOP_MESSAGE, CLEAR_TOP_MESSAGE } from './GlobalConstants'
+import {
+  SET_NETWORK_STATUS,
+  SET_TOP_MESSAGE,
+  CLEAR_TOP_MESSAGE,
+  SET_NETWORK_FAILURE,
+  CLEAR_NETWORK_FAILURE,
+  CHECK_NETWORK_FAILURE
+} from './GlobalConstants';
 
 export function setNetworkStatusAction (payload) {
   return {
     type: SET_NETWORK_STATUS,
     payload
+  }
+}
+export function setNetworkFailureAction (payload) {
+  return {
+    type: SET_NETWORK_FAILURE,
+    payload
+  }
+}
+export function checkNetworkFailureAction (payload) {
+  return {
+    type: CHECK_NETWORK_FAILURE,
+    payload
+  }
+}
+export function clearNetworkFailureAction () {
+  return {
+    type: CLEAR_NETWORK_FAILURE
   }
 }
 export function setTopMessageAction (payload) {

@@ -6,6 +6,7 @@ import { ROLE } from '../Base'
 class Security {
   static #session;
   static #role;
+  static #logout;
   static get session () {
     return this.#session
   }
@@ -18,9 +19,10 @@ class Security {
     if (!this.#role) return false
     return this.#role === ROLE.admin
   }
-  static injectingParam (session, role) {
+  static injectingParam (session, role, logout) {
     this.#session = session
     this.#role = role
+    this.#logout = logout
   }
   static isAuthenticated () {
     return localStorage.getItem('Auth') === 'true'
@@ -31,8 +33,9 @@ class Security {
     return roles.indexOf(localStorage.getItem('role')) > -1
   }
 
-  static signout () {
-
+  static logout () {
+    localStorage.setItem('Auth', 'false')
+    this.#logout()
   }
 }
 

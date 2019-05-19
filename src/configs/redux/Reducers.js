@@ -13,12 +13,20 @@ import languageProviderReducer from '../../redux/locale/LocaleReducer'
 import History from '../History'
 import UserReducer from '../../redux/user/UserReducer'
 import globalReducer from '../../redux/global/GlobalReducer'
+import CityReducer from '../../redux/city/CityReducer'
+import FemaleReducer from '../../redux/female/FemaleReducer'
+import MaleReducer from '../../redux/male/MaleReducer'
+import NumberReducer from '../../redux/number/NumberReducer'
 
 export default function CreateReducer (injectedReducers = {}) {
   const rootReducer = combineReducers({
     language: languageProviderReducer,
     user: UserReducer,
     global: globalReducer,
+    city: CityReducer,
+    female: FemaleReducer,
+    male: MaleReducer,
+    number: NumberReducer,
     router: connectRouter(History),
     ...injectedReducers
   })
@@ -27,7 +35,7 @@ export default function CreateReducer (injectedReducers = {}) {
     transforms: [immutableTransform()],
     key: 'root',
     storage,
-    whitelist: ['global', 'language', 'user']
+    whitelist: [ 'language', 'user']
   }
   return persistReducer(persistConfig, rootReducer)
 }

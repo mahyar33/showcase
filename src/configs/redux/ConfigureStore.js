@@ -11,14 +11,12 @@ import createSagaMiddleware from 'redux-saga'
 import { persistStore } from 'redux-persist'
 import CreateReducer from './Reducers'
 import Reactotron from '../Reactotron'
-import createReduxPromiseListener from 'redux-promise-listener'
 import history from '../History'
 
 const sagaMonitor = Reactotron.createSagaMonitor()
 const sagaMiddleware = createSagaMiddleware({ sagaMonitor })
-const reduxPromiseListener = createReduxPromiseListener()
 const initialState = {}
-const middlewares = [sagaMiddleware, routerMiddleware(history), reduxPromiseListener.middleware]
+const middlewares = [sagaMiddleware, routerMiddleware(history)]
 
 const enhancers = [applyMiddleware(...middlewares), Reactotron.createEnhancer()]
 
@@ -41,5 +39,3 @@ store.runSaga = sagaMiddleware.run
 const persistor = persistStore(store)
 
 export { store, persistor }
-
-export const promiseListener = reduxPromiseListener

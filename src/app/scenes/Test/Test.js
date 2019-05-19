@@ -17,7 +17,7 @@ class Test extends Component {
 
 Test.propTypes = {}
 
-export function mapDispatchToProps (dispatch) {
+function mapDispatchToProps (dispatch) {
   return {
     onSubmitForm: (evt) => {
 

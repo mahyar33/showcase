@@ -1,26 +1,10 @@
-import { ERROR_LOGIN, SET_ROLE, SET_SESSION, START_LOGIN, SUCCESS_LOGIN } from './UserConstants';
-import { promiseListener } from '../../configs/redux/ConfigureStore'
+import { SET_ROLE, SET_SESSION, LOGIN, CLEAR_SESSION, LOGOUT } from './UserConstants'
 
 export const loginAction = () => {
-  return promiseListener.createAsyncFunction({
-    start: START_LOGIN,
-    resolve: SUCCESS_LOGIN,
-    reject: ERROR_LOGIN
-  })
-}
-export const successLoginAction = (payload) => {
   return {
-    type: SUCCESS_LOGIN,
-    payload
+    type: LOGIN
   }
 }
-export const errorLoginAction = (payload) => {
-  return {
-    type: ERROR_LOGIN,
-    payload
-  }
-}
-
 
 export const setSessionAction = (payload) => {
   return {
@@ -28,9 +12,19 @@ export const setSessionAction = (payload) => {
     payload
   }
 }
+export const clearSessionAction = () => {
+  return {
+    type: CLEAR_SESSION
+  }
+}
 export const setRoleAction = (payload) => {
   return {
     type: SET_ROLE,
     payload
+  }
+}
+export const logoutAction = () => {
+  return {
+    type: LOGOUT
   }
 }
