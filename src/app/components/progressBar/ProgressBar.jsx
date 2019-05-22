@@ -1,11 +1,9 @@
-/*
-It uses to implement ProgressBar.
-*/
+// Uses to implement ProgressBar and handle percentage.
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import Wrapper from './Wrapper'
-import Percent from './Percent'
+import Wrapper from './Wrapper.style'
+import Percent from './Percent.style'
 
 class ProgressBar extends React.Component {
   static defaultProps = {

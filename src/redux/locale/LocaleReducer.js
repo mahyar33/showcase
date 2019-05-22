@@ -6,8 +6,8 @@
 
 import { fromJS } from 'immutable'
 
-import { CHANGE_LOCALE } from './LocaleConstants'
-import { DEFAULT_LOCALE } from '../../assets/translations/I18n'
+import { SET_LOCALE } from './LocaleConstants'
+import { DEFAULT_LOCALE } from '../../assets/i18n/I18n'
 
 export const initialState = fromJS({
   locale: DEFAULT_LOCALE
@@ -15,7 +15,7 @@ export const initialState = fromJS({
 
 function languageProviderReducer (state = initialState, action) {
   switch (action.type) {
-    case CHANGE_LOCALE:
+    case SET_LOCALE:
       return state.set('locale', action.locale)
     default:
       return state

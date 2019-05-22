@@ -1,17 +1,28 @@
 // Defining global routes here.
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Template from '../app/scenes/Template/Template'
-import Test from '../app/scenes/Test/Test'
+import Private from '../configs/routing/Private'
+import Redirection from '../configs/routing/Redirection'
+import Security from '../configs/network/Security'
+import Public from '../configs/routing/Public'
+
+const Login = lazy(() => import('../app/scenes/login/Login'))
+const Dashboard = lazy(() => import('../app/scenes/dashboard/Dashboard'))
+const List = lazy(() => import('../app/scenes/list/List'))
 
 const Routes = () => (
-  <Switch>
-    {/*        <Route key={0} exact path="/" component={RedirectIndex}/>, */}
-    <Route key={1} exact path='/temp' component={Template} />
-,
-    <Route key={2} exact path='/test' component={Test} />
-,
-    {/*     <Route component={RedirectIndex}/> */}
-  </Switch>
+
+  <Suspense fallback={<div>Loading...</div>}>
+    <Switch>
+      <Route key={0} exact path='/' component={Redirection} />
+      <Public key={1} path='/login' component={Login} />
+      {/*      <Route key={2} path='/test' component={routeProps => (<Test {...routeProps} />)} />
+      <Route key={3} path='/temp' component={routeProps => (<Temp {...routeProps} />)} /> */}
+      <Private key={4} path='/dashboard' props={{ isUser: Security.isUser, isAdmin: Security.isAdmin }} component={Dashboard} />
+      <Private key={5} path='/List' component={List} />
+      <Route component={Redirection} />
+    </Switch>
+  </Suspense>
+
 )
 export default Routes

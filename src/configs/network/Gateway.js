@@ -3,7 +3,7 @@
 // Also it intercepts all calls for error handling and authentication, authorisation fallbacks
 import axios from 'axios'
 import Security from './Security'
-import { BACK_END } from '../Base'
+import { BACK_END } from '../Applications'
 
 const instance = axios.create({
   baseURL: BACK_END,
@@ -14,84 +14,57 @@ instance.defaults.headers['Content-Type'] = undefined
 
 // All requests are having *config* as an optional parameter which is `axios` [requests configs](https://github.com/axios/axios#request-config).
 class Gateway {
-  static post (url, params = {}, config = null) {
-    return instance.post(url, params, config)
-      .then((payload) => {
-        Gateway.statusChecking(payload)
-      })
-      .catch((error) => {
-        Gateway.errorHandling(error)
-      })
+  static #security;
+  static set security (security) {
+    this.#security = security
+  }
+  static post (url, params = {}, session = false, config = null) {
+    return this.execute(url, { data: params }, config, 'post', session)
+  }
+  static put (url, params = {}, session = false, config = null) {
+    return this.execute(url, { data: params }, config, 'put', session)
+  }
+  static patch (url, params = {}, session = false, config = null) {
+    return this.execute(url, { data: params }, config, 'patch', session)
   }
 
-  static put (url, params = {}, config = null) {
-    return instance.put(url, params, config)
-      .then((payload) => {
-        Gateway.statusChecking(payload)
-      })
-      .catch((error) => {
-        Gateway.errorHandling(error)
-      })
+  static head (url, params = {}, session = false, config = null) {
+    return this.execute(url, { data: params }, config, 'head', session)
   }
 
-  static patch (url, params = {}, config = null) {
-    return instance.patch(url, params, config)
-      .then((payload) => {
-        Gateway.statusChecking(payload)
-      })
-      .catch((error) => {
-        Gateway.errorHandling(error)
-      })
+  static delete (url, params = {}, session = false, config = null) {
+    return this.execute(url, { data: params }, config, 'delete', session)
   }
 
-  static head (url, params = {}, config = null) {
-    return instance.head(url, params, config)
-      .then((payload) => {
-        Gateway.statusChecking(payload)
-      })
-      .catch((error) => {
-        Gateway.errorHandling(error)
-      })
+  static get (url, params = {}, session = false, config = null) {
+    return this.execute(url, { params }, config, 'get', session)
   }
-
-  static delete (url, params = {}, config = null) {
-    return instance.delete(url, params, config)
-      .then((payload) => {
-        Gateway.statusChecking(payload)
-      })
-      .catch((error) => {
-        Gateway.errorHandling(error)
-      })
-  }
-
-  static get (url, urlParams = {}, config = null) {
-    const reConfig = Object.assign({}, config, {
-      params: urlParams
-    })
-    return instance.get(url, reConfig)
-      .then((payload) => {
-        Gateway.statusChecking(payload)
-      })
-      .catch((error) => {
-        Gateway.errorHandling(error)
-      })
-  }
-
-  static postFile (url, formData, config = null) {
+  static postFile (url, formData, session = false, config = null) {
     const reConfig = Object.assign({}, config, {
       headers: {
         'content-type': 'multipart/form-data'
       }
     })
-    return instance.post(url, formData, reConfig)
+    return this.execute(url, { data: formData }, reConfig, 'post', session)
+  }
+  static execute = (url, params = {}, config = null, method = 'get', session = false) => {
+    if (session) {
+      params = Object.assign({}, params, {
+        session: this.#security.session ? this.#security.session : ''
+      })
+    }
+    return instance(url, {
+      ...config,
+      ...params,
+      method
+    })
       .then((payload) => {
-        Gateway.statusChecking(payload)
+        return this.statusChecking(payload)
       })
       .catch((error) => {
-        Gateway.errorHandling(error)
+        return this.errorHandling(error)
       })
   }
-
     // Push other status into error handling
     static statusChecking = (payload) => {
       if (payload.status !== 200) return Promise.reject(payload.status)
@@ -101,17 +74,17 @@ class Gateway {
     static errorHandling = (error) => {
       if (error.response) {
         if (error.response.status === 401) {
-          return Security.signout().then(() => Promise.reject(error.response))
-        } if (error.response.status === 500) return Promise.reject(new Error({ data: { error_message: 'Server Error!' } }))
+          return Security.logout().then(() => Promise.reject(error.response))
+        } if (error.response.status === 500) return Promise.reject(new Error('Server Error!'))
         if (error.response.status === 404) {
           return Promise.reject(
-            new Error({ data: { error_message: error.response.data.error_message } })
+            new Error(error.response.data.error_message)
           )
         }
         return Promise.reject(error.response)
       } if (error) {
         if (error === 401) {
-          return Security.signout().then(() => Promise.reject(error))
+          return Security.logout().then(() => Promise.reject(error))
         }
         return Promise.reject(error)
       }

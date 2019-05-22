@@ -1,8 +1,9 @@
 import { createSelector } from 'reselect'
-import { initialState } from './reducer';// eslint-disable-line
 
-const selectHome = state => state.temp
+const selectGlobal = state => state.global
 
-const makeTemp = () => createSelector(selectHome, homeState => homeState.get('temp'))
+const makeSelectTopMessage = () => createSelector(selectGlobal, globalState => globalState.get('topMessage'))
+const makeSelectNetworkStatus = () => createSelector(selectGlobal, globalState => globalState.get('networkStatus'))
+const makeSelectNetworkFailure = () => createSelector(selectGlobal, globalState => globalState.get('networkFailure'))
 
-export { selectHome, makeTemp }
+export { selectGlobal, makeSelectTopMessage, makeSelectNetworkStatus, makeSelectNetworkFailure }

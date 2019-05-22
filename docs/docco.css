@@ -140,7 +140,7 @@ pre, tt, code {
   .page {
     grid-column: span 9;
     width: 760px;
-    margin: auto;
+    margin: 0 auto;
     padding: 30px;
     padding-top: 0;
     background: #fff;

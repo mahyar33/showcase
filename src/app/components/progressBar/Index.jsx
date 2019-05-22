@@ -1,6 +1,5 @@
-/*
-This class is a [HOC](https://reactjs.org/docs/higher-order-components.html) which add progressbar to app and Do not show progress bar for already loaded routes.
-*/
+// This class is a [HOC](https://reactjs.org/docs/higher-order-components.html) which add progressbar to app and Do not show progress bar for already loaded routes.
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import ProgressBar from './ProgressBar'

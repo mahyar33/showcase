@@ -3,10 +3,10 @@
  */
 
 import { createSelector } from 'reselect'
-import { initialState } from './reducer';// eslint-disable-line
 
-const selectHome = state => state.temp
+const selectUser = state => state.user
 
-const makeTemp = () => createSelector(selectHome, homeState => homeState.get('temp'))
+const makeSelectSession = () => createSelector(selectUser, userState => userState.get('session'))
+const makeSelectRole = () => createSelector(selectUser, userState => userState.get('role'))
 
-export { selectHome, makeTemp }
+export { selectUser, makeSelectSession, makeSelectRole }
