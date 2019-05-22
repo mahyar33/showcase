@@ -1,4 +1,4 @@
-import { takeLatest, put, take, cancel, select, takeEvery } from 'redux-saga/effects'
+import { takeLatest, put, take, cancel, select, takeEvery, putResolve } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'connected-react-router'
 import { CHECK_NETWORK_FAILURE, SET_NETWORK_STATUS } from './GlobalConstants'
 import {
@@ -8,7 +8,7 @@ import {
   setNetworkStatusAction
 } from './GlobalActions'
 import { makeSelectNetworkFailure, makeSelectNetworkStatus } from './GlobalSelectors'
-import { NETWORK_STATUS } from '../../configs/Base'
+import { NETWORK_STATUS } from '../../configs/Applications'
 import { REHYDRATE } from 'redux-persist'
 import { find } from 'lodash'
 
@@ -37,6 +37,15 @@ export function * onNetworkError (e, params) {
   if (!e.status) {
     if (networkStatus === NETWORK_STATUS.online) { yield put(setNetworkStatusAction(NETWORK_STATUS.offline)) }
     if (params) { yield put(checkNetworkFailureAction(params)) }
+  }
+}
+export function * onSocketError (e, params) {
+  let networkStatus = yield select(makeSelectNetworkStatus())
+  if (networkStatus === NETWORK_STATUS.online) { yield put(setNetworkStatusAction(NETWORK_STATUS.offline)) }
+  if (params) {
+    for (const item of params) {
+      yield putResolve(checkNetworkFailureAction(item))
+    }
   }
 }
 export function * onReduxPersist () {

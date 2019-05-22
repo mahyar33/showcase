@@ -3,7 +3,7 @@
 // Also it intercepts all calls for error handling and authentication, authorisation fallbacks
 import axios from 'axios'
 import Security from './Security'
-import { BACK_END } from '../Base'
+import { BACK_END } from '../Applications'
 
 const instance = axios.create({
   baseURL: BACK_END,

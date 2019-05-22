@@ -6,12 +6,12 @@ import { ConnectedRouter } from 'connected-react-router/immutable'
 import { BrowserRouter as Router } from 'react-router-dom'
 import FontFaceObserver from 'fontfaceobserver'
 import { PersistGate } from 'redux-persist/integration/react'
-import history from './configs/History'
+import history from './configs/routing/History'
 import Locale from './configs/Locale'
-import { translationMessages } from './assets/translations/I18n'
-import { persistor, store } from './configs/redux/ConfigureStore'
+import { translationMessages } from './assets/i18n/I18n'
+import { persistor, store } from './configs/redux/Store'
 import Routes from './routes/Routes'
-import SagaRunner from './configs/redux/SagaRunner'
+import runSaga from './configs/redux/Saga'
 import { runDI } from './configs/DependencyInjection'
 import Health from './configs/network/Health'
 
@@ -31,7 +31,7 @@ class App extends Component {
     runDI()
   }
   componentDidMount () {
-    SagaRunner(store)
+    runSaga(store)
     Health.runHealthCheck()
     /*   GlobalServices.checkVersion().then(payload => {
       console.log(payload, 'no')

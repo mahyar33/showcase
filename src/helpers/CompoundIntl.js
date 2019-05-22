@@ -7,7 +7,7 @@ const globSync = require('glob');// eslint-disable-line
 const mkdirpSync = require('mkdirp');// eslint-disable-line
 
 const MESSAGES_PATTERN = { en: './src/**/en.json', fa: './src/**/fa.json' }
-const LANG_DIR = { en: './src/assets/translations/en/', fa: './src/assets/translations/fa/' }
+const LANG_DIR = { en: './src/assets/i18n/en/', fa: './src/assets/i18n/fa/' }
 
 Object.keys(MESSAGES_PATTERN).map((key, index) => {// eslint-disable-line
   const defaultMessages = globSync.sync(MESSAGES_PATTERN[key])

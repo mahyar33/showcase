@@ -1,10 +1,8 @@
-import { take, fork, call, putResolve, put, takeLatest, cancel } from 'redux-saga/effects'
+import { take, fork, call, put, takeLatest, cancel } from 'redux-saga/effects'
 import CitySocket from '../../socket/CitySocket'
-import { createSocketChannel } from '../../configs/redux/SagaChannel'
-import { cityListErrorAction, cityListSuccessfulAction, setCityListAction } from './CityActions';
-import { checkNetworkFailureAction } from '../global/GlobalActions'
-import { maleListErrorAction, maleListSuccessfulAction } from '../male/MaleActions'
-import { onNetworkError } from '../global/GlobalSaga'
+import { createSocketChannel } from '../../configs/redux/Saga'
+import { cityListErrorAction, cityListSuccessfulAction, setCityListAction } from './CityActions'
+import { onNetworkError, onSocketError } from '../global/GlobalSaga'
 import { LOCATION_CHANGE } from 'connected-react-router'
 import CityServices from '../../services/CityServices'
 import { CITY_LIST } from './CityConstants'
@@ -19,9 +17,7 @@ export function * onCitySocket () {
       console.log('payload', payload)
     } catch (err) {
       console.error('socket error:', err.message)
-      for (const item of api) {
-        yield putResolve(checkNetworkFailureAction(item))
-      }
+      yield fork(onSocketError, err, api)
     }
   }
 }

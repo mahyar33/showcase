@@ -5,7 +5,7 @@ import { Redirect, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Security from '../network/Security'
 
-const PublicRoute = ({ component: Component, ...rest }) => (
+const Public = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props => (
@@ -20,7 +20,7 @@ const PublicRoute = ({ component: Component, ...rest }) => (
     )}
   />
 )
-PublicRoute.propTypes = {
-  component: PropTypes.objectOf(PropTypes.object).isRequired
+Public.propTypes = {
+  component: PropTypes.object.isRequired
 }
-export default PublicRoute
+export default Public

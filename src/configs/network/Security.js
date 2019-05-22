@@ -1,7 +1,7 @@
 /* global localStorage */
 // Clarifying our security rules and also roles management
 
-import { ROLE } from '../Base'
+import { ROLE } from '../Applications'
 
 class Security {
   static #session;

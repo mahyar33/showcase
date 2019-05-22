@@ -1,8 +1,8 @@
-import { take, fork, call, putResolve, put } from 'redux-saga/effects'
+import { take, fork, call, put } from 'redux-saga/effects'
 import FemaleSocket from '../../socket/FemaleSocket'
-import { createSocketChannel } from '../../configs/redux/SagaChannel'
+import { createSocketChannel } from '../../configs/redux/Saga'
 import { setFemaleListAction } from './FemaleActions'
-import { checkNetworkFailureAction } from '../global/GlobalActions';
+import { onSocketError } from '../global/GlobalSaga'
 
 export function * onFemaleSocket () {
   const { events, api } = FemaleSocket.backgroundEvents()
@@ -14,9 +14,7 @@ export function * onFemaleSocket () {
       console.log('payload', payload)
     } catch (err) {
       console.error('socket error:', err.message)
-      for (const item of api) {
-        yield putResolve(checkNetworkFailureAction(item))
-      }
+      yield fork(onSocketError, err, api)
     }
   }
 }

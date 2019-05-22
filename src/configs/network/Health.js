@@ -1,5 +1,5 @@
 // Check user connection Status whether it's connected or not
-import { NETWORK_CHECKING_DELAY, NETWORK_STATUS } from '../Base'
+import { NETWORK_CHECKING_DELAY, NETWORK_STATUS } from '../Applications'
 
 require('offline-js')
 

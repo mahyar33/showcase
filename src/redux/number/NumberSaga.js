@@ -3,7 +3,7 @@ import { NUMBER_LIST } from './NumberConstants'
 
 import { LOCATION_CHANGE } from 'connected-react-router'
 import NumberServices from '../../services/NumberServices'
-import { emitter } from '../../configs/redux/SagaChannel'
+import { emitter } from '../../configs/redux/Saga'
 import { onNetworkError } from '../global/GlobalSaga'
 
 export function * onNumberList (params) {

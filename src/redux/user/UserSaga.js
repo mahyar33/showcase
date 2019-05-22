@@ -6,7 +6,7 @@ import { takeLatest, put, take, cancel } from 'redux-saga/effects'
 import { LOCATION_CHANGE, push } from 'connected-react-router'
 import { LOGIN, LOGOUT } from './UserConstants'
 import { clearSessionAction, setSessionAction } from './UserActions'
-import { emitter } from '../../configs/redux/SagaChannel'
+import { emitter } from '../../configs/redux/Saga'
 
 export function * onLogin () {
   console.log('saga')

@@ -7,7 +7,7 @@
 import { fromJS } from 'immutable'
 
 import { SET_LOCALE } from './LocaleConstants'
-import { DEFAULT_LOCALE } from '../../assets/translations/I18n'
+import { DEFAULT_LOCALE } from '../../assets/i18n/I18n'
 
 export const initialState = fromJS({
   locale: DEFAULT_LOCALE
