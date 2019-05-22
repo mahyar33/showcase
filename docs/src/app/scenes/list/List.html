@@ -1290,13 +1290,13 @@
 
       
         
-        <p>Including different tables to show how we can implement different inputs taking from server and handle different conditions when user goes offline or online.
-<strong>City</strong> and <strong>female</strong> take from socket handling in saga as a background process and store in redux. Component receives them from redux (selectors).
-<strong>male</strong> and <strong>number</strong> take from API. <strong>male</strong> stores in redux and component gets it from redux (selectors) but <strong>number</strong> doesn’t store in redux and gets it by event emitters which are handle by <a href="../../components/withEmitter/withEmitter.html">withEmitter</a> HOC component.
-All data whether  socket or api exist in <strong>success</strong> property and all error in <strong>error</strong> property.
-In componentDidMount react lifecycle we call <strong>numberList</strong> and <strong>maleList</strong> which are 2 actions that 2sagas listen to them and invoke API.
-<strong>networkStatus</strong> takes from redux showing whether we are online or not.
-emitter injected to component by withEmitter HOC and it takes array of event. In this component <strong>NUMBER_LIST</strong> is the event that HOC listen to it.</p>
+        <p>Including different tables to show how we can implement different inputs taking from server and handle different conditions when user goes offline or online.<br />
+<strong>City</strong> and <strong>female</strong> take from socket handling in saga as a background process and store in redux. Component receives them from redux (selectors).<br />
+<strong>male</strong> and <strong>number</strong> take from API. <strong>male</strong> stores in redux and component gets it from redux (selectors) but <strong>number</strong> doesn’t store in redux and gets it by event emitters which are handle by <a href="../../components/withEmitter/withEmitter.html">withEmitter</a> HOC component.<br />
+All data whether  socket or api exist in <strong>success</strong> property and all error in <strong>error</strong> property.<br />
+In componentDidMount react lifecycle we call <strong>numberList</strong> and <strong>maleList</strong> which are 2 actions that 2sagas listen to them and invoke API.<br />
+<strong>networkStatus</strong> takes from redux showing whether we are online or not.<br />
+emitter injected to component by withEmitter HOC and it takes array of event. In this component <strong>NUMBER_LIST</strong> is the event that HOC listen to it.<br /></p>
 
         
           <div class='highlight'><pre><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>

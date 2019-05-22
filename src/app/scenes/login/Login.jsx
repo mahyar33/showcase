@@ -1,5 +1,5 @@
-// Simulates login operation by setting role in componentDidMount react lifecycle.
-// Including button that call an action and stimulates related saga to set sessions and handle logic.
+// Simulates login operation by setting role in componentDidMount react lifecycle.<br />
+// Including button that call an action and stimulates related saga to set sessions and handle logic.<br />
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'

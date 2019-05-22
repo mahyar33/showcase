@@ -1290,15 +1290,14 @@
 
       
         
-        <p>A <a href="https://reactjs.org/docs/higher-order-components.html">HOC</a> adding emitter to scenes. It gets array of emitter’s name, listens to events and catches data and sends to sends result to the wrapped component by passing <strong>emitterData</strong> prop.
-Also initializes all return parameter with this format.
-{
-  successful:false,
-  error:false,
-  loading:false
-}
-<strong>successful</strong> for catching data. <strong>error</strong> for caching error. <strong>loading</strong> for showing data not received from server.
-It’s closes all event emitters in componentWillUnmount react lifecycle.</p>
+        <p>A <a href="https://reactjs.org/docs/higher-order-components.html">HOC</a> adding emitter to scenes. It gets array of emitter’s name, listens to events and catches data and sends to sends result to the wrapped component by passing <strong>emitterData</strong> prop.<br />
+Also initializes all return parameter with this format:<br /></p>
+<pre><code>{
+  <span class="hljs-attr">successful</span>:<span class="hljs-literal">false</span>,
+  <span class="hljs-attr">error</span>:<span class="hljs-literal">false</span>,
+  <span class="hljs-attr">loading</span>:<span class="hljs-literal">false</span>
+}</code></pre><p><strong>successful</strong> for catching data. <strong>error</strong> for caching error. <strong>loading</strong> for showing data not received from server.<br />
+It’s closes all event emitters in componentWillUnmount react lifecycle.<br /></p>
 
         
           <div class='highlight'><pre><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>

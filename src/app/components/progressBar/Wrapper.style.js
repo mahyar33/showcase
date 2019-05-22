@@ -1,4 +1,4 @@
-// Style wrapper element used in [ProgressBar.jsx](./ProgressBar.html]).
+// Style wrapper element used in [ProgressBar.jsx](./ProgressBar.html).
 import styled from 'styled-components'
 
 export default styled.div`
