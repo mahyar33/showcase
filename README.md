@@ -56,7 +56,7 @@ It's a React boilerplate with these technologies:
 - **npm run build-langs** build translations files
 
 # Resources
-- Documentation https://pixelsandcode.github.io/web-boilerplate/src/index.html
+- Documentation https://pixelsandcode.github.io/web-boilerplate/README.html
 
 # TODO
 - generate doc from tests or link tests to code doc
