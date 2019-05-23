@@ -1,6 +1,4 @@
-/**
- * Homepage selectors
- */
+// Cuts city where is saved data from redux store.
 
 import { createSelector } from 'reselect'
 

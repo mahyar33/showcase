@@ -1,4 +1,4 @@
-// Specifying the redirect route after authentication.
+// Specifying redirect route.
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 

@@ -1,5 +1,8 @@
+// Clarifying our security rules and also roles management.<br />
+// `injectingParam` handles component dependencies and is invoked from [**DependencyInjection**](../DependencyInjection.html).<br />
+// `isAuthenticated` shows user is login or not.<br />
+// `isAuthorized` shows user has a specific role or not.<br />
 /* global localStorage */
-// Clarifying our security rules and also roles management
 
 import { ROLE } from '../Applications'
 

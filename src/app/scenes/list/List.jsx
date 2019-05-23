@@ -1,10 +1,10 @@
 // Including different tables to show how we can implement different inputs taking from server and handle different conditions when user goes offline or online.<br />
-// **City** and **female** take from socket handling in saga as a background process and store in redux. Component receives them from redux (selectors).<br />
-// **male** and **number** take from API. **male** stores in redux and component gets it from redux (selectors) but **number** doesn't store in redux and gets it by event emitters which are handle by [withEmitter](../../components/withEmitter/withEmitter.html) HOC component.<br />
-// All data whether  socket or api exist in **success** property and all error in **error** property.<br />
-// In componentDidMount react lifecycle we call **numberList** and **maleList** which are 2 actions that 2sagas listen to them and invoke API.<br />
-// **networkStatus** takes from redux showing whether we are online or not.<br />
-// emitter injected to component by withEmitter HOC and it takes array of event. In this component **NUMBER_LIST** is the event that HOC listen to it.<br />
+// `City` and `female` take from socket handling in saga as a background process and store in redux. Component receives them from redux (selectors).<br />
+// `male` and `number` take from API. `male` stores in redux and component gets it from redux (selectors) but `number` doesn't store in redux and gets it by event emitters which are handle by [**withEmitter**](../../components/withEmitter/withEmitter.html) HOC component.<br />
+// All data whether  socket or api exist in `success` property and all error in `error` property.<br />
+// In componentDidMount react lifecycle we call `numberList` and `maleList` which are 2 actions that 2sagas listen to them and invoke API.<br />
+// `networkStatus` takes from redux showing whether we are online or not.<br />
+// emitter injected to component by withEmitter HOC and it takes array of event. In this component `NUMBER_LIST` is the event that HOC listen to it.<br />
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'

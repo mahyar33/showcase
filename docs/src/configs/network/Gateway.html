@@ -1290,9 +1290,9 @@
 
       
         
-        <p><code>HttpRequest</code> is using an instance of <code>axios</code> for customisation such as
+        <p><strong>Gateway</strong> is using an instance of <strong>axios</strong> for customisation such as
 credentials, content type and adding the default base url to all calls.
-Also it intercepts all calls for error handling and authentication, authorisation fallbacks</p>
+Also it intercepts all calls for error handling and authentication, authorisation fallback.</p>
 
         
           <div class='highlight'><pre><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">'axios'</span>
@@ -1306,101 +1306,106 @@ Also it intercepts all calls for error handling and authentication, authorisatio
         
       
         
-        <p>You can add your default headers here</p>
+        <p>You can add your default headers here.</p>
 
         
           <div class='highlight'><pre>instance.defaults.headers[<span class="hljs-string">'Content-Type'</span>] = <span class="hljs-literal">undefined</span></pre></div>
         
       
         
-        <p>All requests are having <em>config</em> as an optional parameter which is <code>axios</code> <a href="https://github.com/axios/axios#request-config">requests configs</a>.</p>
+        <p>All requests are having <code>config</code> as an optional parameter which is <strong>axios</strong> <a href="https://github.com/axios/axios#request-config">requests configs</a> and <code>session</code>
+can be handled if it’s true, it will pass to server automatically. session gets from redux.</p>
 
         
           <div class='highlight'><pre>class Gateway {
-  static #security;
-  static set security (security) {
-    this.#security = security
-  }
-  static post (url, params = {}, session = false, config = null) {
-    return this.execute(url, { data: params }, config, 'post', session)
-  }
-  static put (url, params = {}, session = false, config = null) {
-    return this.execute(url, { data: params }, config, 'put', session)
-  }
-  static patch (url, params = {}, session = false, config = null) {
-    return this.execute(url, { data: params }, config, 'patch', session)
-  }
+    static #security;
+    static set security (security) {
+      this.#security = security
+    }
 
-  static head (url, params = {}, session = false, config = null) {
-    return this.execute(url, { data: params }, config, 'head', session)
-  }
+    static post (url, params = {}, session = false, config = null) {
+      return this.execute(url, { data: params }, config, 'post', session)
+    }
 
-  static delete (url, params = {}, session = false, config = null) {
-    return this.execute(url, { data: params }, config, 'delete', session)
-  }
+    static put (url, params = {}, session = false, config = null) {
+      return this.execute(url, { data: params }, config, 'put', session)
+    }
 
-  static get (url, params = {}, session = false, config = null) {
-    return this.execute(url, { params }, config, 'get', session)
-  }
-  static postFile (url, formData, session = false, config = null) {
-    const reConfig = Object.assign({}, config, {
-      headers: {
-        'content-type': 'multipart/form-data'
+    static patch (url, params = {}, session = false, config = null) {
+      return this.execute(url, { data: params }, config, 'patch', session)
+    }
+
+    static head (url, params = {}, session = false, config = null) {
+      return this.execute(url, { data: params }, config, 'head', session)
+    }
+
+    static delete (url, params = {}, session = false, config = null) {
+      return this.execute(url, { data: params }, config, 'delete', session)
+    }
+
+    static get (url, params = {}, session = false, config = null) {
+      return this.execute(url, { params }, config, 'get', session)
+    }
+
+    static postFile (url, formData, session = false, config = null) {
+      const reConfig = Object.assign({}, config, {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      })
+      return this.execute(url, { data: formData }, reConfig, 'post', session)
+    }
+
+    static execute = (url, params = {}, config = null, method = 'get', session = false) =&gt; {
+      if (session) {
+        params = Object.assign({}, params, {
+          session: this.#security.session ? this.#security.session : ''
+        })
       }
-    })
-    return this.execute(url, { data: formData }, reConfig, 'post', session)
-  }
-  static execute = (url, params = {}, config = null, method = 'get', session = false) =&gt; {
-    if (session) {
-      params = Object.assign({}, params, {
-        session: this.#security.session ? this.#security.session : ''
+      return instance(url, {
+        ...config,
+        ...params,
+        method
       })
-    }
-    return instance(url, {
-      ...config,
-      ...params,
-      method
-    })
-      .then((payload) =&gt; {
-        return this.statusChecking(payload)
-      })
-      .catch((error) =&gt; {
-        return this.errorHandling(error)
-      })
-  }</pre></div>
-        
-      
-        
-        <p>Push other status into error handling</p>
+        .then((payload) =&gt; {
+          return this.statusChecking(payload)
+        })
+        .catch((error) =&gt; {
+          return this.errorHandling(error)
+        })
+    };
 
-        
-          <div class='highlight'><pre>    <span class="hljs-keyword">static</span> statusChecking = <span class="hljs-function">(<span class="hljs-params">payload</span>) =&gt;</span> {
-      <span class="hljs-keyword">if</span> (payload.status !== <span class="hljs-number">200</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(payload.status)
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve(payload)
-    }
+    static statusChecking = (payload) =&gt; {
+      if (payload.status !== 200) return Promise.reject(payload.status)
+      return Promise.resolve(payload)
+    };
 
-    <span class="hljs-keyword">static</span> errorHandling = <span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
-      <span class="hljs-keyword">if</span> (error.response) {
-        <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">401</span>) {
-          <span class="hljs-keyword">return</span> Security.logout().then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">Promise</span>.reject(error.response))
-        } <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">500</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Server Error!'</span>))
-        <span class="hljs-keyword">if</span> (error.response.status === <span class="hljs-number">404</span>) {
-          <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(
-            <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(error.response.data.error_message)
+    static errorHandling = (error) =&gt; {
+      if (error.response) {
+        if (error.response.status === 401) {
+          return Security.logout()
+            .then(() =&gt; Promise.reject(error.response))
+        }
+        if (error.response.status === 500) return Promise.reject(new Error('Server Error!'))
+        if (error.response.status === 404) {
+          return Promise.reject(
+            new Error(error.response.data.error_message)
           )
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error.response)
-      } <span class="hljs-keyword">if</span> (error) {
-        <span class="hljs-keyword">if</span> (error === <span class="hljs-number">401</span>) {
-          <span class="hljs-keyword">return</span> Security.logout().then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">Promise</span>.reject(error))
-        }
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error)
+        return Promise.reject(error.response)
       }
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-number">400</span>))
-    }
+      if (error) {
+        if (error === 401) {
+          return Security.logout()
+            .then(() =&gt; Promise.reject(error))
+        }
+        return Promise.reject(error)
+      }
+      return Promise.reject(new Error(400))
+    };
 }
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Gateway</pre></div>
+export default Gateway</pre></div>
         
       
       <div class="fleur">h</div>

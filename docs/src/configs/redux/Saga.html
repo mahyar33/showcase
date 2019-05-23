@@ -1290,7 +1290,8 @@
 
       
         
-        
+        <p>Handling saga, channel and eventEmitter.</p>
+
         
           <div class='highlight'><pre><span class="hljs-keyword">import</span> { all } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-saga/effects'</span>
 <span class="hljs-keyword">import</span> BaseSocket <span class="hljs-keyword">from</span> <span class="hljs-string">'../../socket/BaseSocket'</span>
@@ -1301,10 +1302,21 @@
 <span class="hljs-keyword">import</span> FemaleSaga <span class="hljs-keyword">from</span> <span class="hljs-string">'../../redux/female/FemaleSaga'</span>
 <span class="hljs-keyword">import</span> MaleSaga <span class="hljs-keyword">from</span> <span class="hljs-string">'../../redux/male/MaleSaga'</span>
 <span class="hljs-keyword">import</span> NumberSaga <span class="hljs-keyword">from</span> <span class="hljs-string">'../../redux/number/NumberSaga'</span>
-<span class="hljs-keyword">import</span> GlobalSaga <span class="hljs-keyword">from</span> <span class="hljs-string">'../../redux/global/GlobalSaga'</span>
+<span class="hljs-keyword">import</span> GlobalSaga <span class="hljs-keyword">from</span> <span class="hljs-string">'../../redux/global/GlobalSaga'</span></pre></div>
+        
+      
+        
+        <p><code>EventEmitter</code> used in all sagas to handle the saga that their result not to store in redux.</p>
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> emitter = <span class="hljs-keyword">new</span> EventEmitter()
-<span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">rootSaga</span> (<span class="hljs-params"></span>) </span>{
+        
+          <div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> emitter = <span class="hljs-keyword">new</span> EventEmitter()</pre></div>
+        
+      
+        
+        <p>all sagas define there.</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">rootSaga</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">yield</span> all([
     ...GlobalSaga,
     ...UserSaga,
@@ -1314,12 +1326,28 @@
     ...NumberSaga
 
   ])
-}
-<span class="hljs-keyword">const</span> runSaga = <span class="hljs-function">(<span class="hljs-params">store</span>) =&gt;</span> {
-  store.runSaga(rootSaga)
-}
+}</pre></div>
+        
+      
+        
+        <p>starts saga.</p>
 
-<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createSocketChannel</span> (<span class="hljs-params">socket</span>) </span>{
+        
+          <div class='highlight'><pre><span class="hljs-keyword">const</span> runSaga = <span class="hljs-function">(<span class="hljs-params">store</span>) =&gt;</span> {
+  store.runSaga(rootSaga)
+}</pre></div>
+        
+      
+        
+        <p>Saga channel used in processing socket in background. uses <a href="https://redux-saga.js.org/docs/api/#eventchannelsubscribe-buffer"><strong>eventChannel</strong></a>, <a href="https://redux-saga.js.org/docs/api/#buffers"><strong>buffers</strong></a> to start a channel and <a href="../../socket/BaseSocket.html">BaseSocket</a> for socket error handling.<br />
+<code>createSocketChannel</code> gets arrays of as a input parameter (<strong>socket</strong>).<br />
+<code>addToChannel</code> sends to socket functions  as a callback.
+If data comes from socket,<code>addToChannel</code> will call and add data to <code>eventChannel</code>.<br />
+<code>errorHandler</code> sends to socket error handler functions as a callback.
+If an error occurs, <code>errorHandler</code> calls.</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createSocketChannel</span> (<span class="hljs-params">socket</span>) </span>{
   <span class="hljs-keyword">return</span> eventChannel(<span class="hljs-function"><span class="hljs-params">emit</span> =&gt;</span> {
     <span class="hljs-keyword">const</span> addToChannel = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
       emit(event)

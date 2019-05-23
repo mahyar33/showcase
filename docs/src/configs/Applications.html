@@ -1290,17 +1290,17 @@
 
       
         
-        
-        
-          <div class='highlight'><pre><span class="hljs-comment">/*
-Defining config constants (for example API URL,..)
-*/</span>
+        <p>Holds system wide constants such as default url or debug level and ….</p>
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> NETWORK_CHECKING_DELAY=<span class="hljs-number">5000</span>; <span class="hljs-comment">// eslint-disable-line</span>
+        
+          <div class='highlight'><pre>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> NETWORK_CHECKING_DELAY = <span class="hljs-number">5000</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> BACK_END = <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">window</span>.location.protocol}</span>//`</span>}</span><span class="hljs-subst">${process.env.REACT_APP_BACKEND ? process.env.REACT_APP_BACKEND : <span class="hljs-string">'localhost:3333'</span>}</span>`</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> SOCKET_ADDRESS = process.env.REACT_APP_SOCKET ? process.env.REACT_APP_SOCKET : <span class="hljs-string">'http://localhost:3333'</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> ROLE = { <span class="hljs-attr">user</span>: <span class="hljs-string">'USER'</span>, <span class="hljs-attr">admin</span>: <span class="hljs-string">'ADMIN'</span> }
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> NETWORK_STATUS = { <span class="hljs-attr">online</span>: <span class="hljs-string">'online'</span>, <span class="hljs-attr">offline</span>: <span class="hljs-string">'offline'</span> }</pre></div>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> NETWORK_STATUS = { <span class="hljs-attr">online</span>: <span class="hljs-string">'online'</span>, <span class="hljs-attr">offline</span>: <span class="hljs-string">'offline'</span> }
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> NETWORK_CHECK_URL = <span class="hljs-string">'http://localhost:3333/number'</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PERSISTENT_STORE = [<span class="hljs-string">'language'</span>, <span class="hljs-string">'user'</span>]</pre></div>
         
       
       <div class="fleur">h</div>

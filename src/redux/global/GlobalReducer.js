@@ -1,3 +1,4 @@
+// This reducer handles global store which behave like a bus event in all components.
 import { fromJS } from 'immutable'
 
 import {

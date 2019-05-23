@@ -1290,16 +1290,14 @@
 
       
         
-        
-        
-          <div class='highlight'><pre><span class="hljs-comment">/* global localStorage */</span></pre></div>
-        
-      
-        
-        <p>Clarifying our security rules and also roles management</p>
+        <p>Clarifying our security rules and also roles management.<br />
+<code>injectingParam</code> handles component dependencies and is invoked from <a href="../DependencyInjection.html"><strong>DependencyInjection</strong></a>.<br />
+<code>isAuthenticated</code> shows user is login or not.<br />
+<code>isAuthorized</code> shows user has a specific role or not.<br /></p>
 
         
-          <div class='highlight'><pre>
+          <div class='highlight'><pre>/* global localStorage */
+
 import { ROLE } from '../Applications'
 
 class Security {

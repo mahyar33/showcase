@@ -2,7 +2,7 @@
 // Renders two kinds of card group based on role.<br />
 // For admin [AdminCardGroup.js](../../components/AdminCardGroup/AdminCardGroup.html).<br />
 // For user [UserCardGroup.js](../../components/UserCardGroup/UserCardGroup.html).<br />
-// Checking admin and user do by **isAdmin** and **isUser** props received from [Routes.jsx](../../../routes/Routes.html).<br />
+// Checking admin and user do by `isAdmin` and `isUser` props received from [Routes.jsx](../../../routes/Routes.html).<br />
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'

@@ -1290,18 +1290,14 @@
 
       
         
+        <p>This will setup the i18n language files and locale data for your app.<br />
+<strong>IMPORTANT</strong>: This file is used by the internal build
+script <code>extract-intl</code>, and must use CommonJS module syntax
+You CANNOT use import/export in this file.</p>
+
         
-        
-          <div class='highlight'><pre><span class="hljs-comment">/**
- * i18n.js
- *
- * This will setup the i18n language files and locale data for your app.
- *
- *   IMPORTANT: This file is used by the internal build
- *   script `extract-intl`, and must use CommonJS module syntax
- *   You CANNOT use import/export in this file.
- */</span>
-<span class="hljs-keyword">const</span> addLocaleData = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-intl'</span>).addLocaleData; <span class="hljs-comment">//eslint-disable-line</span>
+          <div class='highlight'><pre>
+<span class="hljs-keyword">const</span> addLocaleData = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-intl'</span>).addLocaleData;
 <span class="hljs-keyword">const</span> enLocaleData = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-intl/locale-data/en'</span>)
 <span class="hljs-keyword">const</span> deLocaleData = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-intl/locale-data/de'</span>)
 

@@ -1,5 +1,6 @@
-// Prevents user can't enter private routes before authentication
-// by using [`Security`](../utils/Security.html) class.
+// Prevents user can't enter private routes before authentication or having a specific rule
+// by using [`Security`](../network/Security.html) class.
+// Dependencies are passed to component as `props`
 
 import React from 'react'
 import { Redirect, Route } from 'react-router-dom'

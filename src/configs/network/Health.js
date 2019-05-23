@@ -1,5 +1,5 @@
-// Check user connection Status whether it's connected or not
-import { NETWORK_CHECKING_DELAY, NETWORK_STATUS } from '../Applications'
+// Checks user connection Status whether it's connected or not and sets status in redux.
+import { NETWORK_CHECK_URL, NETWORK_CHECKING_DELAY, NETWORK_STATUS } from '../Applications'
 
 require('offline-js')
 
@@ -12,7 +12,7 @@ class health {
     const delay = NETWORK_CHECKING_DELAY
     window.Offline.options = {
       checkOnLoad: true,
-      checks: { xhr: { url: 'http://localhost:3333/number' } }
+      checks: { xhr: { url: NETWORK_CHECK_URL } }
     }
 
     window.Offline.on('up', () => {

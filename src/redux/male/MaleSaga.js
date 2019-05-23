@@ -1,3 +1,4 @@
+// Handles saga functions related to male.
 import { take, takeLatest, cancel, call, put, fork } from 'redux-saga/effects'
 import { MALE_LIST } from './MaleConstants'
 

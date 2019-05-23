@@ -1,1 +1,1 @@
-// Middleware for defining notifications (like chrome notifications)
+// Middleware for defining notifications (like chrome notifications).

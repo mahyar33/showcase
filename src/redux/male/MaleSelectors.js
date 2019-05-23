@@ -1,6 +1,4 @@
-/**
- * Homepage selectors
- */
+// Cuts male where is saved data from redux store.
 
 import { createSelector } from 'reselect'
 

@@ -1,5 +1,5 @@
 // Simple Table just shows one cell per row.<br />
-// Receives **title** and **items** as a props and shows title as a table header and items as a table cell.<br />
+// Receives `title` and `items` as a props and shows title as a table header and items as a table cell.<br />
 
 import React from 'react'
 import PropTypes from 'prop-types'

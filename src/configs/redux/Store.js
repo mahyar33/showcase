@@ -1,9 +1,8 @@
-/*
-    Create the store with two middlewares
-     1. sagaMiddleware: Makes redux-sagas work
-     2. routerMiddleware: Syncs the location/URL path to the state
-    and If Redux DevTools Extension is installed use it, otherwise use Redux compose
-*/
+// Creates the store with two middleware:<br />
+// 1. sagaMiddleware: Makes redux-sagas work<br />
+// 2. routerMiddleware: Syncs the location/URL path to the state<br />
+// and If Redux DevTools Extension is installed uses it, otherwise uses Redux compose.<br />
+// Also persists store.
 
 import { createStore, applyMiddleware, compose } from 'redux'
 import { routerMiddleware } from 'connected-react-router/immutable'

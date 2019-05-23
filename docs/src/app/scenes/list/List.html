@@ -1291,12 +1291,12 @@
       
         
         <p>Including different tables to show how we can implement different inputs taking from server and handle different conditions when user goes offline or online.<br />
-<strong>City</strong> and <strong>female</strong> take from socket handling in saga as a background process and store in redux. Component receives them from redux (selectors).<br />
-<strong>male</strong> and <strong>number</strong> take from API. <strong>male</strong> stores in redux and component gets it from redux (selectors) but <strong>number</strong> doesn’t store in redux and gets it by event emitters which are handle by <a href="../../components/withEmitter/withEmitter.html">withEmitter</a> HOC component.<br />
-All data whether  socket or api exist in <strong>success</strong> property and all error in <strong>error</strong> property.<br />
-In componentDidMount react lifecycle we call <strong>numberList</strong> and <strong>maleList</strong> which are 2 actions that 2sagas listen to them and invoke API.<br />
-<strong>networkStatus</strong> takes from redux showing whether we are online or not.<br />
-emitter injected to component by withEmitter HOC and it takes array of event. In this component <strong>NUMBER_LIST</strong> is the event that HOC listen to it.<br /></p>
+<code>City</code> and <code>female</code> take from socket handling in saga as a background process and store in redux. Component receives them from redux (selectors).<br />
+<code>male</code> and <code>number</code> take from API. <code>male</code> stores in redux and component gets it from redux (selectors) but <code>number</code> doesn’t store in redux and gets it by event emitters which are handle by <a href="../../components/withEmitter/withEmitter.html"><strong>withEmitter</strong></a> HOC component.<br />
+All data whether  socket or api exist in <code>success</code> property and all error in <code>error</code> property.<br />
+In componentDidMount react lifecycle we call <code>numberList</code> and <code>maleList</code> which are 2 actions that 2sagas listen to them and invoke API.<br />
+<code>networkStatus</code> takes from redux showing whether we are online or not.<br />
+emitter injected to component by withEmitter HOC and it takes array of event. In this component <code>NUMBER_LIST</code> is the event that HOC listen to it.<br /></p>
 
         
           <div class='highlight'><pre><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>

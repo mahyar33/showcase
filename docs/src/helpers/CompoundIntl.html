@@ -1297,13 +1297,13 @@ is a flat collection of <code>id: message</code> pairs for the app’s default l
 
         
           <div class='highlight'><pre><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>)
-<span class="hljs-keyword">const</span> globSync = <span class="hljs-built_in">require</span>(<span class="hljs-string">'glob'</span>);<span class="hljs-comment">// eslint-disable-line</span>
-<span class="hljs-keyword">const</span> mkdirpSync = <span class="hljs-built_in">require</span>(<span class="hljs-string">'mkdirp'</span>);<span class="hljs-comment">// eslint-disable-line</span>
+<span class="hljs-keyword">const</span> globSync = <span class="hljs-built_in">require</span>(<span class="hljs-string">'glob'</span>)
+<span class="hljs-keyword">const</span> mkdirpSync = <span class="hljs-built_in">require</span>(<span class="hljs-string">'mkdirp'</span>)
 
 <span class="hljs-keyword">const</span> MESSAGES_PATTERN = { <span class="hljs-attr">en</span>: <span class="hljs-string">'./src/**/en.json'</span>, <span class="hljs-attr">fa</span>: <span class="hljs-string">'./src/**/fa.json'</span> }
 <span class="hljs-keyword">const</span> LANG_DIR = { <span class="hljs-attr">en</span>: <span class="hljs-string">'./src/assets/i18n/en/'</span>, <span class="hljs-attr">fa</span>: <span class="hljs-string">'./src/assets/i18n/fa/'</span> }
 
-<span class="hljs-built_in">Object</span>.keys(MESSAGES_PATTERN).map(<span class="hljs-function">(<span class="hljs-params">key, index</span>) =&gt;</span> {<span class="hljs-comment">// eslint-disable-line</span>
+<span class="hljs-built_in">Object</span>.keys(MESSAGES_PATTERN).map(<span class="hljs-function">(<span class="hljs-params">key, index</span>) =&gt;</span> {
   <span class="hljs-keyword">const</span> defaultMessages = globSync.sync(MESSAGES_PATTERN[key])
     .map(<span class="hljs-function"><span class="hljs-params">filename</span> =&gt;</span> fs.readFileSync(filename, <span class="hljs-string">'utf8'</span>))
     .map(<span class="hljs-function"><span class="hljs-params">file</span> =&gt;</span> <span class="hljs-built_in">JSON</span>.parse(file))
@@ -1313,7 +1313,7 @@ is a flat collection of <code>id: message</code> pairs for the app’s default l
           <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Duplicate message id: <span class="hljs-subst">${id}</span>`</span>)
         }
 
-        collection[id] = defaultMessage;<span class="hljs-comment">// eslint-disable-line</span>
+        collection[id] = defaultMessage
       })
 
       <span class="hljs-keyword">return</span> collection

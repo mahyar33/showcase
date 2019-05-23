@@ -1,3 +1,4 @@
+// All actions related to global store which behave like a bus event in all components.
 import {
   SET_NETWORK_STATUS,
   SET_TOP_MESSAGE,
@@ -5,7 +6,7 @@ import {
   SET_NETWORK_FAILURE,
   CLEAR_NETWORK_FAILURE,
   CHECK_NETWORK_FAILURE
-} from './GlobalConstants';
+} from './GlobalConstants'
 
 export function setNetworkStatusAction (payload) {
   return {

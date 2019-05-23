@@ -1290,16 +1290,12 @@
 
       
         
-        
-        
-          <div class='highlight'><pre><span class="hljs-comment">/*
-  Combine all reducers in this file and export the combined reducers and Config persist stores &amp; defining them in whitelist.
+        <p>Combines all reducers, connects router to redux, persists some stores.</p>
 
- */</span>
-
+        
+          <div class='highlight'><pre>
 <span class="hljs-keyword">import</span> { combineReducers } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>
 <span class="hljs-keyword">import</span> { connectRouter } <span class="hljs-keyword">from</span> <span class="hljs-string">'connected-react-router/immutable'</span>
-
 <span class="hljs-keyword">import</span> { persistReducer } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-persist'</span>
 <span class="hljs-keyword">import</span> immutableTransform <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-persist-transform-immutable'</span>
 <span class="hljs-keyword">import</span> storage <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-persist/lib/storage'</span>
@@ -1311,6 +1307,7 @@
 <span class="hljs-keyword">import</span> FemaleReducer <span class="hljs-keyword">from</span> <span class="hljs-string">'../../redux/female/FemaleReducer'</span>
 <span class="hljs-keyword">import</span> MaleReducer <span class="hljs-keyword">from</span> <span class="hljs-string">'../../redux/male/MaleReducer'</span>
 <span class="hljs-keyword">import</span> NumberReducer <span class="hljs-keyword">from</span> <span class="hljs-string">'../../redux/number/NumberReducer'</span>
+<span class="hljs-keyword">import</span> { PERSISTENT_STORE } <span class="hljs-keyword">from</span> <span class="hljs-string">'../Applications'</span>
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CreateReducer</span> (<span class="hljs-params">injectedReducers = {}</span>) </span>{
   <span class="hljs-keyword">const</span> rootReducer = combineReducers({
@@ -1329,7 +1326,7 @@
     <span class="hljs-attr">transforms</span>: [immutableTransform()],
     <span class="hljs-attr">key</span>: <span class="hljs-string">'root'</span>,
     storage,
-    <span class="hljs-attr">whitelist</span>: [ <span class="hljs-string">'language'</span>, <span class="hljs-string">'user'</span>]
+    <span class="hljs-attr">whitelist</span>: PERSISTENT_STORE
   }
   <span class="hljs-keyword">return</span> persistReducer(persistConfig, rootReducer)
 }</pre></div>

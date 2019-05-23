@@ -1,8 +1,4 @@
-/*
- *
- * LanguageProvider reducer
- *
- */
+// This reducer handles language store.
 
 import { fromJS } from 'immutable'
 

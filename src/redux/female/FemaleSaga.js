@@ -1,3 +1,4 @@
+// Handles saga functions related to city.
 import { take, fork, call, put } from 'redux-saga/effects'
 import FemaleSocket from '../../socket/FemaleSocket'
 import { createSocketChannel } from '../../configs/redux/Saga'

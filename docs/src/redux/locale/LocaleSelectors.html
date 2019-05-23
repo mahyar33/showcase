@@ -1290,19 +1290,13 @@
 
       
         
-        
+        <p>Cuts language where is saved data from redux store.</p>
+
         
           <div class='highlight'><pre><span class="hljs-keyword">import</span> { createSelector } <span class="hljs-keyword">from</span> <span class="hljs-string">'reselect'</span>
 <span class="hljs-keyword">import</span> { initialState } <span class="hljs-keyword">from</span> <span class="hljs-string">'./LocaleReducer'</span>
 
-<span class="hljs-comment">/**
- * Direct selector to the languageToggle state domain
- */</span>
 <span class="hljs-keyword">const</span> selectLanguage = <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> (state.language ? state.language : initialState)
-
-<span class="hljs-comment">/**
- * Select the language locale
- */</span>
 
 <span class="hljs-keyword">const</span> makeSelectLocale = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> createSelector(selectLanguage, languageState =&gt; languageState.get(<span class="hljs-string">'locale'</span>))
 

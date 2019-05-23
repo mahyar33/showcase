@@ -1,3 +1,4 @@
+// This reducer handles number store.
 import { fromJS } from 'immutable'
 import { NUMBER_LIST } from './NumberConstants'
 

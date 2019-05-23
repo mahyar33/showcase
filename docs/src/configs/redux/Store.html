@@ -1290,15 +1290,16 @@
 
       
         
-        
-        
-          <div class='highlight'><pre><span class="hljs-comment">/*
-    Create the store with two middlewares
-     1. sagaMiddleware: Makes redux-sagas work
-     2. routerMiddleware: Syncs the location/URL path to the state
-    and If Redux DevTools Extension is installed use it, otherwise use Redux compose
-*/</span>
+        <p>Creates the store with two middleware:<br /></p>
+<ol>
+<li>sagaMiddleware: Makes redux-sagas work<br /></li>
+<li>routerMiddleware: Syncs the location/URL path to the state<br />
+and If Redux DevTools Extension is installed uses it, otherwise uses Redux compose.<br />
+Also persists store.</li>
+</ol>
 
+        
+          <div class='highlight'><pre>
 <span class="hljs-keyword">import</span> { createStore, applyMiddleware, compose } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>
 <span class="hljs-keyword">import</span> { routerMiddleware } <span class="hljs-keyword">from</span> <span class="hljs-string">'connected-react-router/immutable'</span>
 <span class="hljs-keyword">import</span> createSagaMiddleware <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-saga'</span>

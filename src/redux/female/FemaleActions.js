@@ -1,3 +1,4 @@
+// All actions related to female.
 import { SET_FEMALE_LIST } from './FemaleConstants'
 
 export const setFemaleListAction = (payload) => {

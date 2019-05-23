@@ -3,13 +3,13 @@
 // there are messages in different components that use the same `id`. The result
 // is a flat collection of `id: message` pairs for the app's default locale.
 const fs = require('fs')
-const globSync = require('glob');// eslint-disable-line
-const mkdirpSync = require('mkdirp');// eslint-disable-line
+const globSync = require('glob')
+const mkdirpSync = require('mkdirp')
 
 const MESSAGES_PATTERN = { en: './src/**/en.json', fa: './src/**/fa.json' }
 const LANG_DIR = { en: './src/assets/i18n/en/', fa: './src/assets/i18n/fa/' }
 
-Object.keys(MESSAGES_PATTERN).map((key, index) => {// eslint-disable-line
+Object.keys(MESSAGES_PATTERN).map((key, index) => {
   const defaultMessages = globSync.sync(MESSAGES_PATTERN[key])
     .map(filename => fs.readFileSync(filename, 'utf8'))
     .map(file => JSON.parse(file))
@@ -19,7 +19,7 @@ Object.keys(MESSAGES_PATTERN).map((key, index) => {// eslint-disable-line
           throw new Error(`Duplicate message id: ${id}`)
         }
 
-        collection[id] = defaultMessage;// eslint-disable-line
+        collection[id] = defaultMessage
       })
 
       return collection

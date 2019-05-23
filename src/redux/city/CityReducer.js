@@ -1,3 +1,4 @@
+// This reducer handles city store.
 import { fromJS } from 'immutable'
 import { CITY_LIST, CITY_LIST_ERROR, CITY_LIST_SUCCESSFUL, SET_CITY_LIST } from './CityConstants'
 

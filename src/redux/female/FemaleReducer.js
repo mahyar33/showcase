@@ -1,3 +1,4 @@
+// This reducer handles female store.
 import { fromJS } from 'immutable'
 import { SET_FEMALE_LIST } from './FemaleConstants'
 

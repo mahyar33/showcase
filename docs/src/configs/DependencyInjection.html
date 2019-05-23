@@ -1290,20 +1290,23 @@
 
       
         
+        <p>injects dependencies into pure js functions.
+<code>reduxDispatch</code> is used to inject actions into functions.<br />
+<code>reduxState</code> is used to inject redux stores into functions. when redux is updated, all injected stores will be updated. <br /></p>
+
         
-        
-          <div class='highlight'><pre><span class="hljs-keyword">import</span> Security <span class="hljs-keyword">from</span> <span class="hljs-string">'./network/Security'</span>
+          <div class='highlight'><pre>
+<span class="hljs-keyword">import</span> Security <span class="hljs-keyword">from</span> <span class="hljs-string">'./network/Security'</span>
 <span class="hljs-keyword">import</span> { store } <span class="hljs-keyword">from</span> <span class="hljs-string">'./redux/Store'</span>
 <span class="hljs-keyword">import</span> { createStructuredSelector } <span class="hljs-keyword">from</span> <span class="hljs-string">'reselect'</span>
 <span class="hljs-keyword">import</span> { makeSelectRole, makeSelectSession } <span class="hljs-keyword">from</span> <span class="hljs-string">'../redux/user/UserSelectors'</span>
 <span class="hljs-keyword">import</span> Gateway <span class="hljs-keyword">from</span> <span class="hljs-string">'./network/Gateway'</span>
 <span class="hljs-keyword">import</span> BaseServices <span class="hljs-keyword">from</span> <span class="hljs-string">'../services/BaseServices'</span>
-<span class="hljs-keyword">import</span> io <span class="hljs-keyword">from</span> <span class="hljs-string">'socket.io-client'</span>
-<span class="hljs-keyword">import</span> { SOCKET_ADDRESS } <span class="hljs-keyword">from</span> <span class="hljs-string">'./Applications'</span>
 <span class="hljs-keyword">import</span> BaseSocket <span class="hljs-keyword">from</span> <span class="hljs-string">'../socket/BaseSocket'</span>
 <span class="hljs-keyword">import</span> { logoutAction } <span class="hljs-keyword">from</span> <span class="hljs-string">'../redux/user/UserActions'</span>
 <span class="hljs-keyword">import</span> Health <span class="hljs-keyword">from</span> <span class="hljs-string">'./network/Health'</span>
 <span class="hljs-keyword">import</span> { setNetworkStatusAction } <span class="hljs-keyword">from</span> <span class="hljs-string">'../redux/global/GlobalActions'</span>
+<span class="hljs-keyword">import</span> socket <span class="hljs-keyword">from</span> <span class="hljs-string">'./network/SocketConnection'</span>
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> runDI = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
   <span class="hljs-keyword">const</span> reduxDispatch = {
@@ -1323,7 +1326,7 @@
   })
   Gateway.security = Security
   BaseServices.httpRequest = Gateway
-  BaseSocket.socket = io(SOCKET_ADDRESS)
+  BaseSocket.socket = socket
   Health.setNetworkStatus = reduxDispatch.setNetworkStatus
 }</pre></div>
         

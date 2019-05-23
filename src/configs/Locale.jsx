@@ -1,7 +1,5 @@
-/*
-  This component connects the redux state language locale to the
-  IntlProvider component and i18n messages (loaded from `app/translations`).
-*/
+// connects the redux state language locale to the
+// IntlProvider component and [i18n messages](../assets/i18n/I18n.html).
 
 import React from 'react'
 import PropTypes from 'prop-types'

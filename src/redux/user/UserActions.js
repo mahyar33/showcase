@@ -1,3 +1,4 @@
+// All actions related to user.
 import { SET_ROLE, SET_SESSION, LOGIN, CLEAR_SESSION, LOGOUT } from './UserConstants'
 
 export const loginAction = () => {

@@ -1,3 +1,4 @@
+// All actions related to city.
 import { CITY_LIST, CITY_LIST_ERROR, CITY_LIST_SUCCESSFUL, SET_CITY_LIST } from './CityConstants'
 
 export const setCityListAction = (payload) => {

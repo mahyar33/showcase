@@ -1,3 +1,4 @@
+// This reducer handles user store.
 import { fromJS } from 'immutable'
 import { SET_ROLE, SET_SESSION, CLEAR_SESSION } from './UserConstants'
 

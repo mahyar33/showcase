@@ -1,4 +1,4 @@
-// A [HOC](https://reactjs.org/docs/higher-order-components.html) adding emitter to scenes. It gets array of emitter's name, listens to events and catches data and sends to sends result to the wrapped component by passing **emitterData** prop.<br />
+// A [HOC](https://reactjs.org/docs/higher-order-components.html) adding emitter to scenes. It gets array of emitter's name, listens to events and catches data and sends to sends result to the wrapped component by passing `emitterData` prop.<br />
 // Also initializes all return parameter with this format:<br />
 // ```
 // {
@@ -7,7 +7,7 @@
 //   loading:false
 // }
 // ```
-// **successful** for catching data. **error** for caching error. **loading** for showing data not received from server.<br />
+// `successful` for catching data. `error` for caching error. `loading` for showing data not received from server.<br />
 // It's closes all event emitters in componentWillUnmount react lifecycle.<br />
 import React, { Component } from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'

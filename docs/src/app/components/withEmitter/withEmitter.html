@@ -1290,13 +1290,13 @@
 
       
         
-        <p>A <a href="https://reactjs.org/docs/higher-order-components.html">HOC</a> adding emitter to scenes. It gets array of emitter’s name, listens to events and catches data and sends to sends result to the wrapped component by passing <strong>emitterData</strong> prop.<br />
+        <p>A <a href="https://reactjs.org/docs/higher-order-components.html">HOC</a> adding emitter to scenes. It gets array of emitter’s name, listens to events and catches data and sends to sends result to the wrapped component by passing <code>emitterData</code> prop.<br />
 Also initializes all return parameter with this format:<br /></p>
 <pre><code>{
   <span class="hljs-attr">successful</span>:<span class="hljs-literal">false</span>,
   <span class="hljs-attr">error</span>:<span class="hljs-literal">false</span>,
   <span class="hljs-attr">loading</span>:<span class="hljs-literal">false</span>
-}</code></pre><p><strong>successful</strong> for catching data. <strong>error</strong> for caching error. <strong>loading</strong> for showing data not received from server.<br />
+}</code></pre><p><code>successful</code> for catching data. <code>error</code> for caching error. <code>loading</code> for showing data not received from server.<br />
 It’s closes all event emitters in componentWillUnmount react lifecycle.<br /></p>
 
         

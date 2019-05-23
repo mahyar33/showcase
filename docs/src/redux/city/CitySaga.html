@@ -1290,7 +1290,8 @@
 
       
         
-        
+        <p>Handles saga functions related to city.</p>
+
         
           <div class='highlight'><pre><span class="hljs-keyword">import</span> { take, fork, call, put, takeLatest, cancel } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-saga/effects'</span>
 <span class="hljs-keyword">import</span> CitySocket <span class="hljs-keyword">from</span> <span class="hljs-string">'../../socket/CitySocket'</span>
@@ -1299,9 +1300,18 @@
 <span class="hljs-keyword">import</span> { onNetworkError, onSocketError } <span class="hljs-keyword">from</span> <span class="hljs-string">'../global/GlobalSaga'</span>
 <span class="hljs-keyword">import</span> { LOCATION_CHANGE } <span class="hljs-keyword">from</span> <span class="hljs-string">'connected-react-router'</span>
 <span class="hljs-keyword">import</span> CityServices <span class="hljs-keyword">from</span> <span class="hljs-string">'../../services/CityServices'</span>
-<span class="hljs-keyword">import</span> { CITY_LIST } <span class="hljs-keyword">from</span> <span class="hljs-string">'./CityConstants'</span>
+<span class="hljs-keyword">import</span> { CITY_LIST } <span class="hljs-keyword">from</span> <span class="hljs-string">'./CityConstants'</span></pre></div>
+        
+      
+        
+        <p>Listen to <a href="../../socket/CitySocket.html"><code>CitySocket.backgroundEvents</code></a> events in <a href="../../configs/redux/saga.html"><strong>channel</strong></a>.<br />
+Waits till something puts in channel.<br />
+If data are received from socket, <code>setCityListAction</code> calls and puts data in redux store.<br />
+If error occurs, <code>onSocketError</code> calls to call api related to socket in order to get lost data from socket and checks internet connection to
+move app in offline mode or not. After api call,it connects to socket automatically again.</p>
 
-<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">onCitySocket</span> (<span class="hljs-params"></span>) </span>{
+        
+          <div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">onCitySocket</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">const</span> { events, api } = CitySocket.backgroundEvents()
   <span class="hljs-keyword">const</span> socketChannel = <span class="hljs-keyword">yield</span> call(createSocketChannel, events)
   <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
@@ -1314,12 +1324,24 @@
       <span class="hljs-keyword">yield</span> fork(onSocketError, err, api)
     }
   }
-}
+}</pre></div>
+        
+      
+        
+        <p>Calls <code>onCitySocket</code> when saga starts to handle saga in background.</p>
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">watchCitySocket</span> (<span class="hljs-params"></span>) </span>{
+        
+          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">watchCitySocket</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">yield</span> fork(onCitySocket)
-}
-<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">onCityList</span> (<span class="hljs-params">params</span>) </span>{
+}</pre></div>
+        
+      
+        
+        <p>Calls [<code>CityServices.list</code>]<code>(../../services/CityServices.html) to get data from server.&lt;br /&gt;
+If it&#39;s resolved, it calls</code>cityListSuccessfulAction<code>. If it&#39;s rejected, jumps to catch block and calls</code>cityListErrorAction<code>.&lt;br /&gt;</code>onNetworkError` is used to handle offline mode.</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">onCityList</span> (<span class="hljs-params">params</span>) </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onCityList'</span>, params)
   <span class="hljs-keyword">try</span> {
     <span class="hljs-keyword">const</span> payload = <span class="hljs-keyword">yield</span> call(CityServices.list)
@@ -1328,9 +1350,15 @@
     <span class="hljs-keyword">yield</span> put(cityListErrorAction(err))
     <span class="hljs-keyword">yield</span> fork(onNetworkError, err, params)
   }
-}
+}</pre></div>
+        
+      
+        
+        <p>Listens to the action which return <code>{ type : CITY_LIST }</code> and calls <code>onCityList</code>.<br />
+If route changes, saga operation stops and again listen to ‘CITY_LIST’ till the related action calls.</p>
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">watchCityList</span> (<span class="hljs-params"></span>) </span>{
+        
+          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">watchCityList</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
     <span class="hljs-keyword">const</span> watcher = <span class="hljs-keyword">yield</span> takeLatest(CITY_LIST, onCityList)
     <span class="hljs-keyword">yield</span> take(LOCATION_CHANGE)

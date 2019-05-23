@@ -1,3 +1,4 @@
+// This reducer handles male store.
 import { fromJS } from 'immutable'
 import { MALE_LIST, MALE_LIST_ERROR, MALE_LIST_SUCCESSFUL } from './MaleConstants'
 

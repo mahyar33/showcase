@@ -1290,47 +1290,45 @@
 
       
         
-        
+        <p>Handles saga functions related to user.</p>
+
         
           <div class='highlight'><pre><span class="hljs-comment">/* global localStorage */</span>
-<span class="hljs-comment">/**
- * Gets the repositories of the user from Github
- */</span>
 <span class="hljs-keyword">import</span> { takeLatest, put, take, cancel } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-saga/effects'</span>
 <span class="hljs-keyword">import</span> { LOCATION_CHANGE, push } <span class="hljs-keyword">from</span> <span class="hljs-string">'connected-react-router'</span>
 <span class="hljs-keyword">import</span> { LOGIN, LOGOUT } <span class="hljs-keyword">from</span> <span class="hljs-string">'./UserConstants'</span>
 <span class="hljs-keyword">import</span> { clearSessionAction, setSessionAction } <span class="hljs-keyword">from</span> <span class="hljs-string">'./UserActions'</span>
-<span class="hljs-keyword">import</span> { emitter } <span class="hljs-keyword">from</span> <span class="hljs-string">'../../configs/redux/Saga'</span>
+<span class="hljs-keyword">import</span> { emitter } <span class="hljs-keyword">from</span> <span class="hljs-string">'../../configs/redux/Saga'</span></pre></div>
+        
+      
+        
+        <p><code>Auth</code> is set true in <code>localStorage</code> when user can login successfully.
+It leads user can visit private routes.
+Also sets session in redux which is used in <a href="../../configs/network/Security.html"><strong>Security</strong></a> and <a href="../../configs/network/Gateway.html"><strong>Gateway</strong></a>.</p>
 
-<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">onLogin</span> (<span class="hljs-params"></span>) </span>{
+        
+          <div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">onLogin</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'saga'</span>)
-  emitter.emit(LOGIN, <span class="hljs-string">'ok'</span>, <span class="hljs-string">'no'</span>)
+  emitter.emit(LOGIN, <span class="hljs-string">'ok'</span>)
   localStorage.setItem(<span class="hljs-string">'Auth'</span>, <span class="hljs-string">'true'</span>)
   <span class="hljs-comment">/*  yield put(successLoginAction('ok')) */</span>
   <span class="hljs-keyword">yield</span> put(setSessionAction(<span class="hljs-string">'session'</span>))
 }
 
-<span class="hljs-comment">/**
- * Root saga manages watcher lifecycle
- */</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">watchLogin</span> (<span class="hljs-params"></span>) </span>{</pre></div>
-        
-      
-        
-        <p>Watches for LOAD_REPOS actions and calls getRepos when one comes in.
-By using <code>takeLatest</code> only the result of the latest API call is applied.
-It returns task descriptor (just like fork) so we can continue execution
-It will be cancelled automatically on component unmount</p>
-
-        
-          <div class='highlight'><pre><span class="hljs-comment">/*  yield fork(citySocketSaga) */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">watchLogin</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
     <span class="hljs-keyword">const</span> watcher = <span class="hljs-keyword">yield</span> takeLatest(LOGIN, onLogin)
     <span class="hljs-keyword">yield</span> take(LOCATION_CHANGE)
     <span class="hljs-keyword">yield</span> cancel(watcher)
   }
-}
-<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">onLogout</span> (<span class="hljs-params"></span>) </span>{
+}</pre></div>
+        
+      
+        
+        <p>Clears session and change route to login page onLogout.</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> * <span class="hljs-title">onLogout</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">yield</span> put(clearSessionAction())
   <span class="hljs-keyword">yield</span> put(push(<span class="hljs-string">'/login'</span>))
 }
