@@ -1,4 +1,6 @@
-// Project start from this component
+// Project starts from this component.<br />
+// `runDI` is used in **constructor** to inject all dependencies before project start.<br />
+// 'runSaga' starts saga and 'Health.runHealthCheck' checks internet connection in **componentDidMount** react lifecycle.<br />
 import '@babel/polyfill'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
@@ -16,10 +18,10 @@ import { runDI } from './configs/DependencyInjection'
 import Health from './configs/network/Health'
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
-// the index.html file and this observer)
+// the index.html file and this observer).
 const openSansObserver = new FontFaceObserver('Open Sans', {})
 
-// When Open Sans is loaded, add a font-family using Open Sans to the body
+// When Open Sans is loaded, add a font-family using Open Sans to the body.
 openSansObserver.load()
   .then(() => {
     document.body.classList.add('fontLoaded')
@@ -46,7 +48,6 @@ class App extends Component {
         <PersistGate loading={null} persistor={persistor}>
           <Locale messages={translationMessages}>
             <ConnectedRouter history={history}>
-              {/*       <Temp/> */}
               <Router>
                 <Routes />
               </Router>

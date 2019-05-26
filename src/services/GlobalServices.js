@@ -1,3 +1,4 @@
+// All services related to global events.
 import BaseServices from './BaseServices'
 import { API } from './API'
 

@@ -69,16 +69,6 @@
             
             
             
-            
-            <li class="indent1">
-              <a class="source" href="..\App.test.html">
-                App.test.js
-              </a>
-            </li>
-          
-            
-            
-            
               
               
                 
@@ -1290,7 +1280,9 @@
 
       
         
-        <p>Defining global routes here.</p>
+        <p>Defines global routes.<br />
+<a href="https://reactjs.org/docs/code-splitting.html">lazy</a> uses for code-splitting.<br />
+All scenes dependencies must be passed as props in this file.</p>
 
         
           <div class='highlight'><pre><span class="hljs-keyword">import</span> React, { Suspense, lazy } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
@@ -1305,13 +1297,10 @@
 <span class="hljs-keyword">const</span> List = lazy(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'../app/scenes/list/List'</span>))
 
 <span class="hljs-keyword">const</span> Routes = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
-
   &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
     &lt;Switch&gt;
       &lt;Route key={0} exact path='/' component={Redirection} /&gt;
       &lt;Public key={1} path='/login' component={Login} /&gt;
-      {/*      &lt;Route key={2} path='/test' component={routeProps =&gt; (&lt;Test {...routeProps} /&gt;)} /&gt;
-      &lt;Route key={3} path='/temp' component={routeProps =&gt; (&lt;Temp {...routeProps} /&gt;)} /&gt; */}
       &lt;Private key={4} path='/dashboard' props={{ isUser: Security.isUser, isAdmin: Security.isAdmin }} component={Dashboard} /&gt;
       &lt;Private key={5} path='/List' component={List} /&gt;
       &lt;Route component={Redirection} /&gt;

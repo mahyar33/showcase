@@ -69,16 +69,6 @@
             
             
             
-            
-            <li class="indent1">
-              <a class="source" href="..\App.test.html">
-                App.test.js
-              </a>
-            </li>
-          
-            
-            
-            
               
               
                 
@@ -1290,10 +1280,14 @@
 
       
         
-        
+        <p>Uses to implements common behaviors in all sockets file like handling error.<br />
+<code>#socket</code> is a private variable injected by <a href="../configs/DependencyInjection.html">DependencyInjection</a>.<br />
+All socket are wrapper for <a href="../configs/network/SocketConnection.html">SocketConnection</a> and also they organize and modify return values.<br />
+<code>backgroundEvents</code> returns those events that is used in saga as a background process (<strong>events</strong>) and we can define actions related to socket events in order to call them
+after socket disconnection or facing problems (<strong>api</strong>) .</p>
+
         
           <div class='highlight'><pre>import EVENT from './Event'
-
 export default class BaseSocket {
   static #socket
   static set socket (socket) {
@@ -1313,6 +1307,9 @@ export default class BaseSocket {
   }
   static onDisconnectSocket = (callback) =&gt; {
     this.#socket.on(EVENT.default.disconnect, callback)
+  }
+  static backgroundEvents=() =&gt; {
+    throw new Error('You have to implement the method backgroundEvents!')
   }
 }</pre></div>
         

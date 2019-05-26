@@ -69,16 +69,6 @@
             
             
             
-            
-            <li class="indent1">
-              <a class="source" href="App.test.html">
-                App.test.js
-              </a>
-            </li>
-          
-            
-            
-            
               
               
                 
@@ -1290,7 +1280,9 @@
 
       
         
-        <p>Project start from this component</p>
+        <p>Project starts from this component.<br />
+<code>runDI</code> is used in <strong>constructor</strong> to inject all dependencies before project start.<br />
+‘runSaga’ starts saga and ‘Health.runHealthCheck’ checks internet connection in <strong>componentDidMount</strong> react lifecycle.<br /></p>
 
         
           <div class='highlight'><pre><span class="hljs-keyword">import</span> <span class="hljs-string">'@babel/polyfill'</span>
@@ -1312,14 +1304,14 @@
       
         
         <p>Observe loading of Open Sans (to remove open sans, remove the <link> tag in
-the index.html file and this observer)</p>
+the index.html file and this observer).</p>
 
         
           <div class='highlight'><pre><span class="hljs-keyword">const</span> openSansObserver = <span class="hljs-keyword">new</span> FontFaceObserver(<span class="hljs-string">'Open Sans'</span>, {})</pre></div>
         
       
         
-        <p>When Open Sans is loaded, add a font-family using Open Sans to the body</p>
+        <p>When Open Sans is loaded, add a font-family using Open Sans to the body.</p>
 
         
           <div class='highlight'><pre>openSansObserver.load()
@@ -1348,7 +1340,6 @@ the index.html file and this observer)</p>
         <span class="hljs-tag">&lt;<span class="hljs-name">PersistGate</span> <span class="hljs-attr">loading</span>=<span class="hljs-string">{null}</span> <span class="hljs-attr">persistor</span>=<span class="hljs-string">{persistor}</span>&gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-name">Locale</span> <span class="hljs-attr">messages</span>=<span class="hljs-string">{translationMessages}</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">ConnectedRouter</span> <span class="hljs-attr">history</span>=<span class="hljs-string">{history}</span>&gt;</span>
-              {/*       <span class="hljs-tag">&lt;<span class="hljs-name">Temp</span>/&gt;</span> */}
               <span class="hljs-tag">&lt;<span class="hljs-name">Router</span>&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">Routes</span> /&gt;</span>
               <span class="hljs-tag">&lt;/<span class="hljs-name">Router</span>&gt;</span>

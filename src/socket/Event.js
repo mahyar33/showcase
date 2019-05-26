@@ -1,3 +1,4 @@
+// Defines our EVENT in socket.
 const EVENT = {
   city: {
     new: 'new city',

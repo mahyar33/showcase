@@ -1,3 +1,5 @@
+// All socket events related to city.
+
 import EVENT from './Event'
 import BaseSocket from './BaseSocket'
 import { CITY_LIST } from '../redux/city/CityConstants'

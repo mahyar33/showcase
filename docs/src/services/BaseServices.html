@@ -69,16 +69,6 @@
             
             
             
-            
-            <li class="indent1">
-              <a class="source" href="..\App.test.html">
-                App.test.js
-              </a>
-            </li>
-          
-            
-            
-            
               
               
                 
@@ -1290,7 +1280,10 @@
 
       
         
-        
+        <p>Uses to implements common behaviors in all services file.<br />
+<code>#httpRequest</code> is a private variable injected by <a href="../configs/DependencyInjection.html">DependencyInjection</a>.<br />
+All services are wrapper for <a href="../configs/network/Gateway.html">Gateway</a> and also they organize and modify return values.</p>
+
         
           <div class='highlight'><pre>class BaseServices {
     static #httpRequest

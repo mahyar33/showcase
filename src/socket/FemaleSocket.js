@@ -1,3 +1,4 @@
+// All socket events related to female.
 import EVENT from './Event'
 import BaseSocket from './BaseSocket'
 
