@@ -41,6 +41,7 @@
   },
   "scripts": {
     "start": "cross-env npm-run-all -p start-js watch-langs",
+    "start-sw": "serve -s build",
     "github-pages": "npm run doc && gh-pages-deploy",
     "doc-windows": "del /f /s /q \"./docs\" && docco {src,test}/{**/*,*} README.md misc/tutorials/{**/*,*} -t ./misc/template/docco.jst -c ./misc/template/docco.css && xcopy /S /E \"./misc/template/public\" \"./docs\"",
     "doc": "rm -fr ./docs && docco README.md $(find {src,test,misc/tutorials} -type f) -t ./misc/template/docco.jst -c ./misc/template/docco.css && cp -r ./misc/template/public ./docs",

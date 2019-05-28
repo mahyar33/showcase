@@ -45,16 +45,16 @@ class List extends Component {
         </Grid.Row> : null}
       <Grid.Row columns={2}>
         <Grid.Column>
-          <SimpleTable items={city.success} title={'City Name'} />
+          <SimpleTable items={city.success ? city.success : []} title={'City Name'} />
         </Grid.Column>
         <Grid.Column>
-          <SimpleTable items={female.success} title={'Female Name'} />
+          <SimpleTable items={female.success ? female.success : []} title={'Female Name'} />
         </Grid.Column>
         <Grid.Column>
-          <SimpleTable items={number.success} title={'number Name'} />
+          <SimpleTable items={number.success ? number.success : []} title={'number Name'} />
         </Grid.Column>
         <Grid.Column>
-          <SimpleTable items={male.success} title={'male List'} />
+          <SimpleTable items={male.success ? male.success : []} title={'male List'} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

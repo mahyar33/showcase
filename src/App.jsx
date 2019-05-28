@@ -1,6 +1,6 @@
 // Project starts from this component.<br />
 // `runDI` is used in **constructor** to inject all dependencies before project start.<br />
-// 'runSaga' starts saga and 'Health.runHealthCheck' checks internet connection in **componentDidMount** react lifecycle.<br />
+// `runSaga` starts saga and 'Health.runHealthCheck' checks internet connection in **componentDidMount** react lifecycle.<br />
 import '@babel/polyfill'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'

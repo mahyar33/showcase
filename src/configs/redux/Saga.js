@@ -42,7 +42,7 @@ export function createSocketChannel (socket) {
       emit(event)
     }
     const errorHandler = (errorEvent) => {
-      emit(errorEvent)
+      emit(new Error(errorEvent))
     }
     socket.map((item) => {
       item(addToChannel)

@@ -26,6 +26,7 @@ Object.keys(MESSAGES_PATTERN).map((key, index) => {
     }, {})
 
   mkdirpSync.sync(LANG_DIR[key])
-  fs.writeFileSync(`${LANG_DIR[key]}/main-${key}.json`, JSON.stringify(defaultMessages, null, 2))
+/*  fs.writeFileSync(`${LANG_DIR[key]}/main-${key}.json`, JSON.stringify(defaultMessages, null, 2))*/
+  fs.writeFileSync(`${LANG_DIR[key]}/main.json`, JSON.stringify(defaultMessages, null, 2))
   console.log('<---- Translation file merged --->')
 })

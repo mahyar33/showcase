@@ -1343,7 +1343,7 @@ If an error occurs, <code>errorHandler</code> calls.</p>
       emit(event)
     }
     <span class="hljs-keyword">const</span> errorHandler = <span class="hljs-function">(<span class="hljs-params">errorEvent</span>) =&gt;</span> {
-      emit(errorEvent)
+      emit(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(errorEvent))
     }
     socket.map(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> {
       item(addToChannel)

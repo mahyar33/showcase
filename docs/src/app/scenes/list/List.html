@@ -1329,16 +1329,16 @@ emitter injected to component by withEmitter HOC and it takes array of event. In
         &lt;/Grid.Row&gt; : null}
       &lt;Grid.Row columns={2}&gt;
         &lt;Grid.Column&gt;
-          &lt;SimpleTable items={city.success} title={'City Name'} /&gt;
+          &lt;SimpleTable items={city.success ? city.success : []} title={'City Name'} /&gt;
         &lt;/Grid.Column&gt;
         &lt;Grid.Column&gt;
-          &lt;SimpleTable items={female.success} title={'Female Name'} /&gt;
+          &lt;SimpleTable items={female.success ? female.success : []} title={'Female Name'} /&gt;
         &lt;/Grid.Column&gt;
         &lt;Grid.Column&gt;
-          &lt;SimpleTable items={number.success} title={'number Name'} /&gt;
+          &lt;SimpleTable items={number.success ? number.success : []} title={'number Name'} /&gt;
         &lt;/Grid.Column&gt;
         &lt;Grid.Column&gt;
-          &lt;SimpleTable items={male.success} title={'male List'} /&gt;
+          &lt;SimpleTable items={male.success ? male.success : []} title={'male List'} /&gt;
         &lt;/Grid.Column&gt;
       &lt;/Grid.Row&gt;
     &lt;/Grid&gt;

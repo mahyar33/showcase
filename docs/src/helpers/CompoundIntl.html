@@ -1310,7 +1310,8 @@ is a flat collection of <code>id: message</code> pairs for the app’s default l
     }, {})
 
   mkdirpSync.sync(LANG_DIR[key])
-  fs.writeFileSync(<span class="hljs-string">`<span class="hljs-subst">${LANG_DIR[key]}</span>/main-<span class="hljs-subst">${key}</span>.json`</span>, <span class="hljs-built_in">JSON</span>.stringify(defaultMessages, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>))
+<span class="hljs-comment">/*  fs.writeFileSync(`${LANG_DIR[key]}/main-${key}.json`, JSON.stringify(defaultMessages, null, 2))*/</span>
+  fs.writeFileSync(<span class="hljs-string">`<span class="hljs-subst">${LANG_DIR[key]}</span>/main.json`</span>, <span class="hljs-built_in">JSON</span>.stringify(defaultMessages, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>))
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'&lt;---- Translation file merged ---&gt;'</span>)
 })</pre></div>
         
